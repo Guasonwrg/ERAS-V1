@@ -1,0 +1,161 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+.escenarios-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+}
+/* Search filters */
+.filters {
+  display: flex;
+  gap: 20px; /* Espacio entre los campos */
+}
+
+.input-container {
+  position: relative;
+  width: 100%; /* Ajusta el ancho según tus necesidades */
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-container label {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  transform: translateY(50%);
+  font-size: 14px;
+  color: #666;
+  transition: 0.2s;
+  pointer-events: none;
+  background: #fff; /* Fondo para que no se superponga al input */
+  padding: 0 4px;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  top: -12px;
+  left: 8px;
+  font-size: 12px;
+  color: #333; /* Cambia el color si es necesario */
+}
+.escenarios-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Selected Escenario Styles */
+.selected-escenario {
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+  padding: 15px;
+  background-color: #ecf0f1;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.selected-escenario h3 {
+  background-color: #3498db;
+  color: #000;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-align: center; /* Centra el título */
+}
+
+.selected-escenario p {
+  margin: 5px 0;
+  color: #34495e;
+  width: 50%; 
+  display: inline-block; 
+  text-align: left; 
+}
+
+/* Table Styles */
+.table-container {
+  width: 65%;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #3498db;
+  color: white;
+}
+
+td {
+  position: relative; /* Make sure the button is positioned properly */
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Formulacion Button Styles */
+.formulacion-button-container {
+  display: flex;
+  justify-content: space-between; /* Alinea los botones a izquierda y derecha */
+  margin-bottom: 20px;
+}
+
+.formulacion-button {
+  padding: 10px 15px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formulacion-button:hover {
+  background-color: #27ae60;
+}
+
+.back-button {
+  background-color: #de8825;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  background-color: #e69500; 
+}
+
+.back-button:focus, .formulacion-button:focus {
+  outline: none;
+}

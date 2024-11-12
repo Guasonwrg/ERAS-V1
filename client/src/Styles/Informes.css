@@ -1,0 +1,36 @@
+.informes-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+  
+  .botones-informes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .btn-informe {
+    padding: 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-informe:hover {
+    background-color: #2980b9;
+  }
+  

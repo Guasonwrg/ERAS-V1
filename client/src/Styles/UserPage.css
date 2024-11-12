@@ -1,0 +1,89 @@
+.user-page-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+  }
+  
+  .user-info {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-info-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #259FDE;
+    text-align: center;
+  }
+  
+  .user-info-field {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-info-field label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .user-info-field span {
+    color: #555;
+  }
+  
+  .modify-button {
+    width: 100%;
+    padding: 10px;
+    background: #259FDE;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modify-button:hover {
+    background: #1d82b8;
+  }
+  
+/* Estilos globales para asegurar que el contenido ocupa toda la altura de la pantalla */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Asegura que la App ocupe toda la altura de la pantalla */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ajusta el contenedor principal para que ocupe todo el espacio disponible */
+.user-page-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+/* Footer siempre al fondo */
+footer {
+  background-color: #f1f1f1;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; /* Esta línea asegura que el footer se empuje hacia abajo */
+}
+
