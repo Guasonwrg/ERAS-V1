@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline for Client and Server
 
 on:
   push:
@@ -7,34 +7,58 @@ on:
       - master
 
 jobs:
-  build-and-test:
+  build-and-test-client:
     runs-on: ubuntu-latest
     steps:
+      # Paso 1: Clonar el repositorio
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      # Paso 2: Configurar Node.js para client
+      - name: Set up Node.js for client
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '20.16.0'
 
-      - name: Install dependencies
+      # Paso 3: Instalar dependencias de client
+      - name: Install client dependencies
         run: npm install
+        working-directory: client
 
-      - name: Run tests
-        run: npm test
+      # Paso 4: Ejecutar pruebas de client
+      - name: Run client tests
+        run: npm test -- --watchAll=false
+        working-directory: client
 
-      - name: Build application
+      # Paso 5: Construir la aplicación client
+      - name: Build client application
         run: npm run build
+        working-directory: client
 
-  deploy:
+  build-and-test-server:
     runs-on: ubuntu-latest
-    needs: build-and-test
     steps:
+      # Paso 1: Clonar el repositorio
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy application
-        run: |
-          echo "Desplegando la aplicación..."
+      # Paso 2: Configurar Node.js para server
+      - name: Set up Node.js for server
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.16.0'
 
+      # Paso 3: Instalar dependencias de server
+      - name: Install server dependencies
+        run: npm install
+        working-directory: server
+
+      # Paso 4: Ejecutar pruebas de server
+      - name: Run server tests
+        run: npm test -- --passWithNoTests
+        working-directory: server
+
+      # Paso opcional: Construir la aplicación server (si es necesario)
+      - name: Build server application
+        run: npm run build
+        working-directory: server
