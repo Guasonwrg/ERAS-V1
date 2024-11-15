@@ -19,7 +19,7 @@
     "react-modal": "^3.16.1",
     "react-paginate": "^8.2.0",
     "react-router-dom": "^6.26.1",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "react-sweetalert2": "^0.6.0",
     "react-toastify": "^8.1.0",
     "sweetalert2": "^11.6.13",
@@ -29,8 +29,8 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false --passWithNoTests",
+    "build": "react-scripts --openssl-legacy-provider start build",
+    "test": "react-scripts --openssl-legacy-provider start test --watchAll=false --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
