@@ -11,32 +11,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Paso 1: Clonar el repositorio
+      # Este paso utiliza la acción oficial de GitHub para clonar el código del repositorio actual.
       - name: Checkout code
         uses: actions/checkout@v2
 
       # Paso 2: Configurar Node.js para client
+      # Configura la versión de Node.js que se va a usar en el job, en este caso, v20.16.0.
       - name: Set up Node.js for client
         uses: actions/setup-node@v2
         with:
           node-version: '20.16.0'
 
       # Paso 3: Instalar dependencias de client
+      # Navega al directorio `client` y ejecuta `npm install` para instalar todas las dependencias necesarias.
       - name: Install client dependencies
         run: npm install
         working-directory: client
 
+      # Paso 4: Configurar la variable de entorno para OpenSSL
+      # Establece `NODE_OPTIONS` para evitar el error de OpenSSL al construir la aplicación.
       - name: Set environment for OpenSSL
         run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
 
-      # Paso 4: Ejecutar pruebas de client
+      # Paso 5: Ejecutar pruebas de client
+      # Ejecuta las pruebas de React configuradas en `client` sin el modo de observación.
       - name: Run client tests
         run: npm test -- --watchAll=false
         working-directory: client
 
-      # Paso 5: Construir la aplicación client
+      # Paso 6: Construir la aplicación client
+      # Construye la aplicación React para producción en el directorio `client`.
       - name: Build client application
         run: npm run build
         working-directory: client
+        
 
   build-and-test-server:
     runs-on: ubuntu-latest
