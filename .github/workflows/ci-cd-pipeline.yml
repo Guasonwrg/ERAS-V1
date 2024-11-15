@@ -25,6 +25,9 @@ jobs:
         run: npm install
         working-directory: client
 
+      - name: Set environment for OpenSSL
+        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+
       # Paso 4: Ejecutar pruebas de client
       - name: Run client tests
         run: npm test -- --watchAll=false
@@ -58,7 +61,3 @@ jobs:
         run: npm test -- --passWithNoTests
         working-directory: server
 
-      # Paso opcional: Construir la aplicación server (si es necesario)
-      - name: Build server application
-        run: npm run build
-        working-directory: server
