@@ -71,18 +71,25 @@ const CambiosPendientes = () => {
     try {
       let url;
       let data;
+      let method;
   
       if (activeTab === 'agregados') {
         url = 'http://localhost:5000/api/cambios-pendientes/confirmar-agregados-masivo';
         data = agregados; 
+        method = 'post';
       } else if (activeTab === 'modificados') {
         url = 'http://localhost:5000/api/cambios-pendientes/confirmar-modificados-masivo';
         data = modificados; 
+        method = 'put';
       } else {
         return;
       }
   
-      await axios.post(url, data);
+      await axios({
+        method: method,
+        url: url,
+        data: data
+      });
   
       setMensaje(`Todos los registros de ${activeTab} fueron confirmados exitosamente.`);
   
@@ -107,7 +114,6 @@ const CambiosPendientes = () => {
         switch (tipo) {
             case 'agregados':
                 url = 'http://localhost:5000/api/cambios-pendientes/confirmar-agregado';
-                // Usa directamente el objeto registro y asegúrate de que el campo 'Registro' existe
                 payload = { ...registro }; 
                 break;
             case 'modificados':
@@ -170,11 +176,11 @@ const renderTableRows = (data, tipo) =>
         <td>{nombreComercial}</td>
         <td>{aptitud}</td>
         <td>{sustanciaActiva}</td>
-        <td>
+        <td className="acciones">
           <Button variant="success" onClick={() => handleAction(tipo, item)}>
             Confirmar
           </Button>
-          <Button variant="info" onClick={() => openModal(item)} style={{ marginLeft: '10px' }}>
+          <Button variant="info" onClick={() => openModal(item)}>
             Ver
           </Button>
         </td>

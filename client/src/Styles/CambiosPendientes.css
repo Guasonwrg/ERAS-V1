@@ -61,6 +61,10 @@
     font-weight: 500;
     color: #455a64;
   }
+  .acciones {
+    display: flex;
+    gap: 10px;
+  }
   
     
   

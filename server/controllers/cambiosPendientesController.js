@@ -146,7 +146,7 @@ const confirmarAgregados = async (req, res) => {
 // Confirmar modificados (edición masiva con transacción)
 const confirmarModificados = async (req, res) => {
   const registrosModificados = req.body; // Recibir los registros del request
-
+  console.log('Registros recibidos para modificar:', registrosModificados);
   const sequelize = MgapPest.sequelize; // Instancia de Sequelize
 
   try {
@@ -161,6 +161,8 @@ const confirmarModificados = async (req, res) => {
       const actualizaciones = [];
 
       for (const registro of registrosModificados) {
+        console.log('Registro actualizando:', registro);
+
         // Validar que cada registro tenga un 'Registro' (clave única)
         if (!registro.Registro) {
           throw new Error(`Registro inválido: ${JSON.stringify(registro)}`);

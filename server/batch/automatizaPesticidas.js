@@ -170,7 +170,7 @@ async function obtenerDatosBD() {
 }
 
 // Normalización de valores
-function normalizarValor(valor) {
+/*function normalizarValor(valor) {
     if (valor === undefined || valor === null || valor === '') {
         return '';
     }
@@ -185,7 +185,7 @@ function normalizarValor(valor) {
         }
     }
     return String(valor).trim().toUpperCase();
-}
+}*/
 
 // Mapeo de columnas
 const mapeoColumnas = {
@@ -318,7 +318,7 @@ const equivalencias = {
     'DIFLUFENICAN': 'Diflufenican',
     'SPINOSAD  factor A + D': 'Spinosad',
     'IODOSULFURON METIL SODIO': 'Iodosulfuron-metil-sodio',
-    // Agrega más equivalencias según sea necesario
+    // Agregar más equivalencias de ser necesario
 };
 
 // Función para normalizar cadenas: quita espacios, convierte a string, maneja 'null' y '--------------', y aplica equivalencias

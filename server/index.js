@@ -21,7 +21,7 @@ const hiCancer = require('./routes/hiCancerRoutes');
 const informeOcupacional = require('./routes/informeOcupacionalRoutes');
 const batchRoute = require('./routes/batchRoutes');
 const cambiosPendientes = require('./routes/cambiosPendientesRoutes');
-const scriptRoutes = require('./routes/scriptRoutes'); 
+//const scriptRoutes = require('./routes/scriptRoutes'); 
 
 
 // Configura la zona horaria
@@ -43,20 +43,26 @@ app.use(express.json());
 setupAssociations();
 
 // Programa la tarea cron para que se ejecute todos los lunes 03:00
-cron.schedule('0 3 * * 1', async () => {
-  console.log('El cron job se ha disparado a las 03:00.');
-  try {
-    const response = await axios.post('http://localhost:5000/api/batch/ejecutar-batch');
-    console.log('Respuesta de la API:', response.data);
-  } catch (error) {
-    console.error('Error al llamar a la API para ejecutar el batch:', error);
-  }
-});
+if (process.env.NODE_ENV !== 'test') {
+  cron.schedule('0 2 * * *', () => {
+    console.log('Ejecutando el script programado a las 2:00 AM...');
+  });
+
+  cron.schedule('0 3 * * 1', async () => {
+    console.log('El cron job se ha disparado a las 03:00.');
+    try {
+      const response = await axios.post('http://localhost:5000/api/batch/ejecutar-batch');
+      console.log('Batch ejecutado con éxito:', response.data);
+    } catch (error) {
+      console.error('Error ejecutando el batch:', error);
+    }
+  });
+}
 
 // Sincroniza los modelos con la base de datos
-sequelize.sync().then(() => {
+/*sequelize.sync().then(() => {
   console.log('Base de datos sincronizada');
-});
+});*/
 
 // Rutas
 app.use('/api/users', userRoutes);
@@ -74,7 +80,7 @@ app.use('/api/hi-cancer', hiCancer);
 app.use('/api/informes-ocupacional', informeOcupacional);
 app.use('/api/batch', batchRoute);
 app.use('/api/cambios-pendientes', cambiosPendientes);
-app.use('/api', scriptRoutes);
+//app.use('/api', scriptRoutes);
 
 
 app.use((req, res, next) => {
@@ -84,6 +90,11 @@ app.use((req, res, next) => {
 
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
+  });
+}
+
+module.exports = app;

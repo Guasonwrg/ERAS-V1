@@ -1,9 +1,9 @@
 import React from 'react';
-import '../src/Styles/adminPage.css'; // Asegúrate de que la ruta sea correcta
-import { useAuth } from './authContext'; // Importa el hook para usar el contexto de autenticación
+import '../src/Styles/adminPage.css'; 
+import { useAuth } from './authContext'; 
 
 function AdminPage() {
-  const { user } = useAuth(); // Obtén el usuario del contexto de autenticación
+  const { user } = useAuth(); 
 
   return (
     <div className="admin-page-body">

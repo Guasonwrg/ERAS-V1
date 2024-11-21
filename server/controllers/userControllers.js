@@ -28,10 +28,11 @@ const loginUser = async (req, res) => {
 
     // Verificar si hay cambios pendientes
     const cambiosPendientes = await InformeCambios.findOne({ where: { estado: 'pendiente' } });
-    console.log(cambiosPendientes);
+   // console.log(cambiosPendientes);
     const tieneCambiosPendientes = !!cambiosPendientes; // true si hay cambios
-    console.log(tieneCambiosPendientes);
+    //console.log(tieneCambiosPendientes);
     res.json({
+      mensaje: 'Bienvenido',
       token,
       user: {
         Id: user.Id,
