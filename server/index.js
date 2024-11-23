@@ -43,11 +43,11 @@ app.use(express.json());
 setupAssociations();
 
 // Programa la tarea cron para que se ejecute todos los lunes 03:00
-if (process.env.NODE_ENV !== 'test') {
+/*if (process.env.NODE_ENV !== 'test') {
   cron.schedule('0 2 * * *', () => {
     console.log('Ejecutando el script programado a las 2:00 AM...');
-  });
-
+  });*/
+// lunes 3AM: '0 3 * * 1'
   cron.schedule('0 3 * * 1', async () => {
     console.log('El cron job se ha disparado a las 03:00.');
     try {
@@ -57,12 +57,12 @@ if (process.env.NODE_ENV !== 'test') {
       console.error('Error ejecutando el batch:', error);
     }
   });
-}
+//}
 
 // Sincroniza los modelos con la base de datos
-/*sequelize.sync().then(() => {
+sequelize.sync().then(() => {
   console.log('Base de datos sincronizada');
-});*/
+});
 
 // Rutas
 app.use('/api/users', userRoutes);
