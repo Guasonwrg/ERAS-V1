@@ -75,11 +75,11 @@ h2 {
 }
 
 .selected-escenario h3 {
-  background-color: #3498db;
-  color: #000;
+  background-color: #007bff;
+  color: #ffffff;
   margin-bottom: 10px;
   border-radius: 10px;
-  text-align: center; /* Centra el título */
+  text-align: center; 
 }
 
 .selected-escenario p {
@@ -159,3 +159,23 @@ tr:hover {
 .back-button:focus, .formulacion-button:focus {
   outline: none;
 }
+.btn-limpiar {
+  float: right;
+  background-color: #ff4d4d; /* Rojo */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-limpiar:hover {
+  background-color: #e60000; /* Rojo más oscuro en hover */
+}
+
+.btn-limpiar:active {
+  background-color: #cc0000; /* Rojo aún más oscuro en active */
+}
+

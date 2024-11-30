@@ -105,7 +105,7 @@
   }
   
   th {
-    background-color: #4A90E2;
+    background-color: #007bff;
     color: white;
     padding: 15px;
     font-weight: bold;
@@ -132,7 +132,7 @@
   button {
     margin: 10px;
     padding: 12px 20px;
-    background-color: #4A90E2;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -176,4 +176,85 @@
   .btn-descarga:hover {
     background-color: #1a2d6c;
   }
-    
+  .ocup-tablas-container {
+    margin: 20px auto; 
+    max-width: 1200px; 
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .imagenes-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .imagen-fumigacion {
+    max-width: 200px;
+    border-radius: 8px;
+  }
+  
+  .fila-destacada,
+  .fila-secundaria,
+  .fila-terciaria {
+    margin-bottom: 20px;
+  }
+  
+  .fila-destacada {
+    display: flex;
+    justify-content: space-around; /* Separar equitativamente los elementos */
+    background-color: #f4f4f4;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .campo-destacado {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .fila-secundaria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Asegurar que los campos estén centrados */
+    gap: 15px;
+  }
+  
+  .campo-secundario {
+    flex: 1 1 calc(45% - 20px);
+    background-color: #e8f5e9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .fila-terciaria {
+    display: flex;
+    justify-content: space-around; /* Separar equitativamente los campos */
+    background-color: #f9fbe7;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .campo-terciario {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .botones-container {
+    display: flex;
+    justify-content: center; /* Centrar los botones */
+    gap: 10px;
+    margin-top: 20px;
+  }
+  

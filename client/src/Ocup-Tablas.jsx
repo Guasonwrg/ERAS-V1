@@ -13,16 +13,43 @@ function OcupTablas() {
   const [valorCoincidente, setValorCoincidente] = useState(null);
   const [registroHiCancer, setRegistroHiCancer] = useState(null);
   const [valorHiCancer, setValorHiCancer] = useState(null);
+  const [isSaved, setIsSaved] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState('');
   const [error, setError] = useState('');
 
+  const [selectedTasaDilucion, setSelectedTasaDilucion] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedTasaDilucion')) || location.state?.selectedTasaDilucion || null;
+  });
+  
+  const [selectedPesticida, setSelectedPesticida] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedPesticida')) || location.state?.selectedPesticida || null;
+  });
+  
+  const [selectedEscenario, setSelectedEscenario] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedEscenario')) || location.state?.selectedEscenario || null;
+  });
+  
+  const [selectedCoadyuvante, setSelectedCoadyuvante] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedCoadyuvante')) || location.state?.selectedCoadyuvante || null;
+  });
+  
+  const [selectedActividadDiaria, setSelectedActividadDiaria] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedActividadDiaria')) || location.state?.selectedActividadDiaria || null;
+  });
+
+  const [riesgoData, setRiesgoData] = useState(() => {
+    return JSON.parse(localStorage.getItem('riesgoData')) || location.state?.riesgoData || null;
+  });
+
+
+
   //obriene los datos de las vistas anteriores que viene en el estado
-  const selectedEscenario = location.state?.selectedEscenario;
-  const pesticidaSeleccionado = location.state?.selectedPesticida;
-  const selectedCoadyuvante = location.state?.selectedCoadyuvante;
-  const selectedTasaDilucion = location.state?.selectedTasaDilucion;
-  const selectedActividadDiaria = location.state?.selectedActividadDiaria;
+  //const selectedEscenario = location.state?.selectedEscenario;
+  //const pesticidaSeleccionado = location.state?.selectedPesticida;
+  //const selectedCoadyuvante = location.state?.selectedCoadyuvante;
+  //const selectedTasaDilucion = location.state?.selectedTasaDilucion;
+  //const selectedActividadDiaria = location.state?.selectedActividadDiaria;
 
   //obtengo los datos del usuario desde el localStorage
   const obtenerUsuario = () => {
@@ -63,15 +90,29 @@ function OcupTablas() {
     };
   
     try {
-     // console.log('Datos a enviar:', datosInforme);
-  
       const response = await axios.post(
         'http://localhost:5000/api/informes-ocupacional/guardar',
         datosInforme
       );
-  
-      //console.log('Respuesta del servidor:', response.data);
+
       setMensaje('Informe guardado exitosamente.');
+
+      setIsSaved(true);
+      //elimino los datos utlizados para el informe del localStorage
+      localStorage.removeItem('selectedEscenario');
+      localStorage.removeItem('selectedPesticida');
+      localStorage.removeItem('selectedCoadyuvante');
+      localStorage.removeItem('selectedTasaDilucion');
+      localStorage.removeItem('selectedActividadDiaria');
+      localStorage.removeItem('valorReal');
+      localStorage.removeItem('diasManipulacion');
+      localStorage.removeItem('aniosManipulacion');
+      localStorage.removeItem('porcentajeAnios');
+      localStorage.removeItem('contactoDermico');
+      localStorage.removeItem('gradoProteccion');
+      localStorage.removeItem('mensajeProteccion');
+      localStorage.removeItem('codigoIdentificacion');
+
     } catch (error) {
       console.error('Error al guardar el informe:', error);
   
@@ -306,64 +347,66 @@ function OcupTablas() {
   };
 
   return (
-    <div className="ocup-tablas-container">
-      <h2>Estimaciones de Exposición y Riesgo Ocupacionales por toxicidad no relativa al cáncer</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div className="imagenes-container">
-        <img src="/images/fumigacion1.jpg" alt="Fumigación 1" className="imagen-fumigacion" />
-        <img src="/images/fumigacion2.jpg" alt="Fumigación 2" className="imagen-fumigacion" />
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID Escenario</th>
-            <th>Actividad del trabajador</th>
-            <th>Categoría</th>
-            <th>Nivel de EPP o EC</th>
-            <th>Tasa de aplicación</th>
-            <th>Unidad de Tasa de aplicación</th>
-          </tr>
-        </thead>
-          <tr>
-            <td>{selectedEscenario.ID_Escenario}</td>
-            <td>{selectedEscenario.Actividad_trabajador}</td>
-            <td>{selectedEscenario.Categoria_objetivo}</td>
-            <td>{selectedActividadDiaria.codigoIdentificacion}</td>
-            <td>{selectedTasaDilucion.valorPesticida}</td>
-            <td>{selectedEscenario.Unidades_tasa_aplicacion_1}</td>
-          </tr>
-        <thead>
-          <tr>
-            <th>Área tratada o cantidad manipulada por día</th>
-            <th>Unidad de área tratada / cantidad manipulada</th>
-            <th>ARI</th>
-            <th>Escenario de exposición - Formulación - Equipo - Tipo de aplicación</th>
-            <th>HI</th>
-            <th>HI cáncer</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{selectedActividadDiaria.valorReal === '' ? (
-              selectedActividadDiaria.datosAuxActividadDiaria.Valor_Convertido
-            ) : selectedActividadDiaria.valorReal}</td>
-            <td>{selectedActividadDiaria.datosAuxActividadDiaria.Unidades_Reales}</td>
-            <td>{valorCoincidente}</td>
-            <td>{selectedEscenario.Escenario_resumido_textual}</td>
-            <td>{valorCoincidente === '' ? (
-              ''
-            ) :roundToThreeDecimals(1 / valorCoincidente)}</td>
-            <td>{roundToThreeDecimals(valorHiCancer)}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div> {loading ? (
-          <p>Cargando...</p>
-        ) : (
-          mensaje && <p>{mensaje}</p>
-        )}
-      </div>
-      <button onClick={guardarInforme} className="btn-guardar-informe">
+      <div className="ocup-tablas-container">
+        <h2>Estimaciones de Exposición y Riesgo Ocupacionales por Toxicidad no Relativa al Cáncer</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+
+        <div className="imagenes-container">
+          <img src="/images/fumigacion1.jpg" alt="Fumigación 1" className="imagen-fumigacion" />
+          <img src="/images/fumigacion2.jpg" alt="Fumigación 2" className="imagen-fumigacion" />
+        </div>
+
+        {/* Primera fila destacada */}
+        <div className="fila-destacada">
+          <div className="campo-destacado">
+            <strong>ARI:</strong> {valorCoincidente}
+          </div>
+          <div className="campo-destacado">
+            <strong>HI:</strong> {valorCoincidente === '' ? '' : roundToThreeDecimals(1 / valorCoincidente)}
+          </div>
+          <div className="campo-destacado">
+            <strong>HI cáncer:</strong> {roundToThreeDecimals(valorHiCancer)}
+          </div>
+        </div>
+
+        {/* Segunda fila */}
+        <div className="fila-secundaria">
+          <div className="campo-secundario">
+            <strong>Categoría objetivo:</strong> {selectedEscenario.Categoria_objetivo}
+          </div>
+          <div className="campo-secundario">
+            <strong>Actividad del trabajador:</strong> {selectedEscenario.Actividad_trabajador}
+          </div>
+          <div className="campo-secundario">
+            <strong>Nivel EPP/EC:</strong> {selectedActividadDiaria.codigoIdentificacion}
+          </div>
+          <div className="campo-secundario">
+            <strong>Área tratada / Unidad:</strong> {selectedActividadDiaria.valorReal === '' 
+              ? `${selectedActividadDiaria.datosAuxActividadDiaria.Valor_Convertido} ${selectedActividadDiaria.datosAuxActividadDiaria.Unidades_Reales}`
+              : `${selectedActividadDiaria.valorReal} ${selectedActividadDiaria.datosAuxActividadDiaria.Unidades_Reales}`}
+          </div>
+          <div className="campo-secundario">
+            <strong>Tasa de aplicación:</strong> {selectedTasaDilucion.valorPesticida} {selectedEscenario.Unidades_tasa_aplicacion_1}
+          </div>
+        </div>
+
+        {/* Tercera fila */}
+        <div className="fila-terciaria">
+          <div className="campo-terciario">
+            <strong>ID Escenario:</strong> {selectedEscenario.ID_Escenario}
+          </div>
+          <div className="campo-terciario">
+            <strong>Escenario resumido:</strong> {selectedEscenario.Escenario_resumido_textual}
+          </div>
+        </div>
+
+        {/* Mensaje y carga */}
+        <div>
+          {loading ? <p>Cargando...</p> : mensaje && <p>{mensaje}</p>}
+        </div>
+
+
+      <button onClick={guardarInforme} disabled={isSaved || loading} className="btn-guardar-informe">
         Guardar Informe
       </button>
       <button onClick={exportarExcel} className="btn-descarga">

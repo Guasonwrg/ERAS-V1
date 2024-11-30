@@ -6,7 +6,7 @@ body {
     background-color: #f4f4f9;
   }
   
-  .escenarios-container {
+  .pesticide-selection-container {
     max-width: 1200px;
     margin: 20px auto;
     background-color: #fff;
@@ -19,6 +19,10 @@ body {
     text-align: center;
     color: #2c3e50;
   }
+  h3{
+    border-radius: 10px; 
+  }
+  
   
   /* Search filters */
   .filters {
@@ -91,7 +95,7 @@ body {
   }
   
   th {
-    background-color: #3498db;
+    background-color: #007bff;
     color: white;
   }
   
@@ -104,7 +108,7 @@ body {
   }
   
   button {
-    background-color: #3498db;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -135,5 +139,62 @@ body {
   
   .formulacion-button:hover {
     background-color: #27ae60;
+  }
+  .detalle-pesticida-container {
+    margin: 20px auto;
+    max-width: 1080px;
+    text-align: left;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detalle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+  }
+  
+  .detalle-grid p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .mensaje-seleccion {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  .coadyuvante-container {
+    background-color: #f0f0f0;
+    max-width: 1000px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+  }
+  
+  .coadyuvante-container div {
+    margin-bottom: 10px;
+  }
+  
+  .coadyuvante-container .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .coadyuvante-container .column {
+    flex: 1 1 30%;
+  }
+  
+  .coadyuvante-container .column-wide {
+    flex: 1 1 100%;
+  }
+  
+  .coadyuvante-container .column-half {
+    flex: 1 1 45%;
   }
   
