@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'; // Importa Swal para mostrar mensajes
+import Swal from 'sweetalert2'; 
 import '../src/Styles/FormulariosVista.css';
 
 function FormulariosVista() {

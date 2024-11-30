@@ -1,0 +1,19 @@
+.img-pequena {
+    max-width: 50%; 
+    height: auto; 
+    margin: 0 auto; 
+    display: block; 
+  }
+  .row.justify-content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .img-pequena {
+    max-width: 50%;
+    height: auto;
+    margin: 0 auto;
+  }
+  

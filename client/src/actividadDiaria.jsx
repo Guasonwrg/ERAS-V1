@@ -4,28 +4,66 @@ import axios from 'axios';
 import './Styles/ActividadDiaria.css';
 
 function ActividadDiaria() {
-    const location = useLocation();
     const navigate = useNavigate();
+    const location = useLocation();
     const [datosAuxActividadDiaria, setDatosAuxActividadDiaria] = useState(null);
     const [datosGradoProteccion, setDatosGradoProteccion] = useState(null);
-    //const [datos, setDatos] = useState(null);
-    const [valorReal, setValorReal] = useState('');
-    const [diasManipulacion, setDiasManipulacion] = useState('');
-    const [aniosManipulacion, setAniosManipulacion] = useState('');
-    const [porcentajeAnios, setPorcentajeAnios] = useState('');
-    const [contactoDermico, setContactoDermico] = useState('');
-    const [gradoProteccion, setGradoProteccion] = useState('');
-    const [mensajeProteccion, setMensajeProteccion] = useState('');
-    const [codigoIdentificacion, setCodigoIdentificacion] = useState('');
     const [error, setError] = useState(''); 
+  const [valorReal, setValorReal] = useState(() => {
+      return localStorage.getItem('valorReal') || '';
+  });
+  const [diasManipulacion, setDiasManipulacion] = useState(() => {
+      return localStorage.getItem('diasManipulacion') || '';
+  });
+  const [aniosManipulacion, setAniosManipulacion] = useState(() => {
+      return localStorage.getItem('aniosManipulacion') || '';
+  });
+  const [porcentajeAnios, setPorcentajeAnios] = useState(() => {
+      return localStorage.getItem('porcentajeAnios') || '';
+  });
+  const [contactoDermico, setContactoDermico] = useState(() => {
+      return localStorage.getItem('contactoDermico') || '';
+  });
+  const [gradoProteccion, setGradoProteccion] = useState(() => {
+      return localStorage.getItem('gradoProteccion') || '';
+  });
+  const [mensajeProteccion, setMensajeProteccion] = useState(() => {
+    return localStorage.getItem('mensajeProteccion') || '';
+  });
+  const [codigoIdentificacion, setCodigoIdentificacion] = useState(() => {
+      return localStorage.getItem('codigoIdentificacion') || '';
+  });
+
+  const [selectedTasaDilucion, setSelectedTasaDilucion] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedTasaDilucion')) || location.state?.selectedTasaDilucion || null;
+  });
+  
+  const [selectedPesticida, setSelectedPesticida] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedPesticida')) || location.state?.selectedPesticida || null;
+  });
+  
+  const [selectedEscenario, setSelectedEscenario] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedEscenario')) || location.state?.selectedEscenario || null;
+  });
+  
+  const [selectedCoadyuvante, setSelectedCoadyuvante] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedCoadyuvante')) || location.state?.selectedCoadyuvante || null;
+  });
+  
+  const [selectedActividadDiaria, setSelectedActividadDiaria] = useState(() => {
+    return JSON.parse(localStorage.getItem('selectedActividadDiaria')) || location.state?.selectedActividadDiaria || null;
+  });
+
+// Repetir para los demás datos como selectedPesticida, selectedCoadyuvante, etc.
+
   
     // Datos recibidos de las vistas anteriores
-    const selectedEscenario = location.state?.selectedEscenario;
-    const pesticidaSeleccionado = location.state?.selectedPesticida;
-    const selectedCoadyuvante = location.state?.selectedCoadyuvante;
-    const selectedTasaDilucion = location.state?.selectedTasaDilucion;
+   // const selectedEscenario = location.state?.selectedEscenario;
+    //const selectedPesticida = location.state?.selectedPesticida;
+    //const selectedCoadyuvante = location.state?.selectedCoadyuvante;
+    //const selectedTasaDilucion = location.state?.selectedTasaDilucion;
 
-    console.log(selectedTasaDilucion);
+    //console.log(selectedTasaDilucion);
     const obtenerDatosAuxActividadDiaria = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/actividad-diaria', {
@@ -66,6 +104,17 @@ function ActividadDiaria() {
         getGradoProteccion()
       }
     }, [selectedEscenario]);
+
+    useEffect(() => {
+      localStorage.setItem('valorReal', valorReal);
+      localStorage.setItem('diasManipulacion', diasManipulacion);
+      localStorage.setItem('aniosManipulacion', aniosManipulacion);
+      localStorage.setItem('porcentajeAnios', porcentajeAnios);
+      localStorage.setItem('contactoDermico', contactoDermico);
+      localStorage.setItem('gradoProteccion', gradoProteccion);
+      localStorage.setItem('mensajeProteccion', mensajeProteccion);
+      localStorage.setItem('codigoIdentificacion', codigoIdentificacion);
+  }, [valorReal, diasManipulacion, aniosManipulacion, porcentajeAnios, contactoDermico, gradoProteccion, mensajeProteccion, codigoIdentificacion,]);
   
    
 
@@ -119,27 +168,39 @@ function ActividadDiaria() {
   
     // Función para navegar a la vista de riesgo
     const handleRiesgo = () => {
-
+      // Preparar los datos necesarios
       const selectedActividadDiaria = {
+        valorReal,
+        diasManipulacion,
+        aniosManipulacion,
+        porcentajeAnios,
+        contactoDermico,
+        gradoProteccion,
         mensajeProteccion,
         codigoIdentificacion,
-        datosAuxActividadDiaria, 
-        valorReal
-      }
-      // Verificar que los datos requeridos estén completos
-      //if (selectedEscenario && pesticidaSeleccionado && datos.actividadDiaria && datos.diasAnio) {
-        navigate(`/riesgo`, {
-          state: {
-            selectedEscenario,
-            pesticidaSeleccionado,
-            selectedCoadyuvante,
-            selectedTasaDilucion,
-            selectedActividadDiaria
-          },
-        });
+        datosAuxActividadDiaria,
+        datosGradoProteccion,
+      };
+    
+      // Guardar en localStorage para persistencia
+      localStorage.setItem('selectedActividadDiaria', JSON.stringify(selectedActividadDiaria));
+      localStorage.setItem('selectedEscenario', JSON.stringify(selectedEscenario));
+      localStorage.setItem('selectedPesticida', JSON.stringify(selectedPesticida));
+      localStorage.setItem('selectedCoadyuvante', JSON.stringify(selectedCoadyuvante));
+      localStorage.setItem('selectedTasaDilucion', JSON.stringify(selectedTasaDilucion));
+    
+      // Navegar pasando datos con location.state
+      navigate('/riesgo', {
+        state: {
+          selectedActividadDiaria,
+          selectedEscenario,
+          selectedPesticida,
+          selectedCoadyuvante,
+          selectedTasaDilucion,
+        },
+      });
     };
-  
-
+    
   return (
     <div className="actividad-diaria-container">
       <h2>PARÁMETROS PARA CÁLCULO DE EXPOSICIÓN DEL TRABAJADOR</h2>
@@ -152,131 +213,100 @@ function ActividadDiaria() {
             Cálculo Riesgo
             </button>
         </div>
-      <table className="tabla-actividad-diaria">
-        <thead>
-          <tr>
-            <th>Códigos de escenario</th>
-            <th>Combinación formulación con equipo y tipo de aplicación</th>
-            <th>Tipo de producción</th>
-            <th>Actividad del trabajador</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{`${selectedEscenario?.ID_Escenario} - ${datosAuxActividadDiaria?.Codigo_Unificado}`}</td>
-            <td>{selectedEscenario.Escenario_resumido_textual}</td>
-            <td>{selectedEscenario.Categoria_objetivo}</td>
-            <td>{selectedEscenario.Actividad_trabajador}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table className="tabla-actividad-diaria">
-        <thead>
-          <tr>
-            <th>Cantidad manipulada o área tratada por día</th>
-            <th>Unidades</th>
-            <th>Valor</th>
-          </tr>
-          <tr>
-            <td>Cantidad definida por defecto por U.S. EPA</td>
-            <td>{datosAuxActividadDiaria?.Unidades_Reales}</td>
-            <td>{datosAuxActividadDiaria?.Valor_Convertido}</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Valor real empleado en el predio evaluado</td>
-            <td>{datosAuxActividadDiaria?.Unidades_Reales}</td>
-            <td>
-              <input
-                type="number"
-                name="actividadDiaria"
-                value={valorReal}
-                onChange={handleValorReal}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <div className="actividad-diaria">
+          <h3>Actividad Diaria</h3>
+          <div className="grid-container-diaria">
+            <div className="grid-header-diaria">
+              <strong>Códigos de escenario</strong>
+            </div>
+            <div className="grid-header-diaria">
+              <strong>Combinación formulación con equipo y tipo de aplicación</strong>
+            </div>
+            <div className="grid-header-diaria">
+              <strong>Tipo de producción</strong>
+            </div>
+            <div className="grid-header-diaria">
+              <strong>Actividad del trabajador</strong>
+            </div>
 
-      <h3>Años de trabajo manipulando plaguicidas y número de aplicaciones por año</h3>
-      <table className="tabla-actividad-diaria">
-        <thead>
-          <tr>
-            <th>Exposición</th>
-            <th>Parámetro</th>
-            <th>Unidades</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Dérmica y por inhalación</td>
-            <td>Días por año manipulando el plaguicida</td>
-            <td>d/año</td>
-            <td><input
-                type="number"
-                name="diasAnio"
-                value={diasManipulacion}
-                onChange={handleDiasManipulacion}
-              /></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>Años de trabajo manipulando plaguicidas</td>
-            <td>años</td>
-            <td><input
-                type="number"
-                name="aniosTrabajo"
-                value={aniosManipulacion}
-                onChange={handleAniosManipulacion}
-              /></td>
-          </tr>
-          <tr>
-            <td>Ingesta</td>
-            <td>% de años de la vida expuestos a ingesta contaminada</td>
-            <td>%</td>
-            <td><input
-                type="number"
-                name="porcentajeIngesta"
-                value={porcentajeAnios}
-                onChange={handlePorcentajeAnios}
-              /></td>
-          </tr>
-          <tr>
-            <td>Dérmica accidental</td>
-            <td>Contacto con producto comercial o solución diluida (caldo)</td>
-            <td>
-              <select
-                name="contactoDermico"
-                value={contactoDermico}
-                onChange={handleContactoDermico}
-              >
+            <div className="grid-item-diaria">
+              {`${selectedEscenario?.ID_Escenario} - ${datosAuxActividadDiaria?.Codigo_Unificado}`}
+            </div>
+            <div className="grid-item-diaria">{selectedEscenario.Escenario_resumido_textual}</div>
+            <div className="grid-item-diaria">{selectedEscenario.Categoria_objetivo}</div>
+            <div className="grid-item-diaria">{selectedEscenario.Actividad_trabajador}</div>
+          </div>
+        </div>
+        <div className="actividad-diaria-tratada">
+          <h3>Actividad Diaria - Tratada</h3>
+          <div className="grid-container-diaria-tratada">
+
+            <div className="grid-header-diaria-tratada">Cantidad manipulada o área tratada por día</div>
+            <div className="grid-header-diaria-tratada">Unidades</div>
+            <div className="grid-header-diaria-tratada">Valor</div>
+
+            <div className="grid-item-diaria-tratada">Cantidad definida por defecto por U.S. EPA</div>
+            <div className="grid-item-diaria-tratada">{datosAuxActividadDiaria?.Unidades_Reales}</div>
+            <div className="grid-item-diaria-tratada">{datosAuxActividadDiaria?.Valor_Convertido}</div>
+
+            <div className="grid-item-diaria-tratada">Valor real empleado en el predio evaluado</div>
+            <div className="grid-item-diaria-tratada">{datosAuxActividadDiaria?.Unidades_Reales}</div>
+            <div className="grid-item-diaria-tratada">
+              <input type="number" name="actividadDiaria" value={valorReal} onChange={handleValorReal}className="form-input"/>
+            </div>
+          </div>
+        </div>
+
+        <div className="actividad-diaria-exposicion">
+          <h3>Años de trabajo manipulando plaguicidas y número de aplicaciones por año</h3>
+          <div className="grid-container-diaria-exposicion">
+
+            <div className="grid-header-diaria-exposicion">Exposición</div>
+            <div className="grid-header-diaria-exposicion">Parámetro</div>
+            <div className="grid-header-diaria-exposicion">Unidades</div>
+            <div className="grid-header-diaria-exposicion">Valor</div>
+
+            <div className="grid-item-diaria-exposicion">Dérmica y por inhalación</div>
+            <div className="grid-item-diaria-exposicion">Días por año manipulando el plaguicida</div>
+            <div className="grid-item-diaria-exposicion">d/año</div>
+            <div className="grid-item-diaria-exposicion">
+              <input type="number"name="diasAnio"value={diasManipulacion}onChange={handleDiasManipulacion}className="form-input"/>
+            </div>
+
+            <div className="grid-item-diaria-exposicion"></div>
+            <div className="grid-item-diaria-exposicion">Años de trabajo manipulando plaguicidas</div>
+            <div className="grid-item-diaria-exposicion">años</div>
+            <div className="grid-item-diaria-exposicion">
+              <input type="number"name="aniosTrabajo"value={aniosManipulacion}onChange={handleAniosManipulacion}className="form-input"/>
+            </div>
+
+            <div className="grid-item-diaria-exposicion">Ingesta</div>
+            <div className="grid-item-diaria-exposicion">% de años de la vida expuestos a ingesta contaminada</div>
+            <div className="grid-item-diaria-exposicion">%</div>
+            <div className="grid-item-diaria-exposicion">
+              <input type="number"name="porcentajeIngesta"value={porcentajeAnios}onChange={handlePorcentajeAnios}className="form-input"/>
+            </div>
+            <div className="grid-item-diaria-exposicion">Dérmica accidental</div>
+            <div className="grid-item-diaria-exposicion">Contacto con producto comercial o solución diluida (caldo)</div>
+            <div className="grid-item-diaria-exposicion"></div>
+            <div className="grid-item-diaria-exposicion">
+              <select name="contactoDermico"value={contactoDermico}onChange={handleContactoDermico}className="form-input">
                 <option value="Caldo">Caldo</option>
                 <option value="Concentrado">Concentrado</option>
               </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+          </div>
+        </div>
 
-      <h3>Equipos de protección personal (EPPs) o medidas de control por ingeniería (EC)</h3>
-      <table className="tabla-actividad-diaria">
-        <thead>
-          <tr>
-            <th>Grado de protección</th>
-            <th>Descripción</th>
-            <th>Código de identificación</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <select
-                name="gradoProteccion"
-                value={gradoProteccion}
-                onChange={handleChange}
-              >
+        <div className="epps-medidas">
+          <h3>Equipos de protección personal (EPPs) o medidas de control por ingeniería (EC)</h3>
+          <div className="grid-container-epps">
+            <div className="grid-header-epps">Grado de protección</div>
+            <div className="grid-header-epps">Descripción</div>
+            <div className="grid-header-epps">Código de identificación</div>
+
+            <div className="grid-item-epps">
+              <select name="gradoProteccion" value={gradoProteccion} onChange={handleChange}>
                 <option value="">-- Seleccionar --</option>
                 <option value="Protección media">Protección media</option>
                 <option value="Sin protección">Sin Protección</option>
@@ -292,12 +322,12 @@ function ActividadDiaria() {
                 <option value="Alta dérmica, sin respiratoria">Alta dérmica, sin respiratoria</option>
                 <option value="Estándar dérmica, sin respiratoria">Estándar dérmica, sin respiratoria</option>
               </select>
-            </td>
-            <td>{mensajeProteccion}</td>
-            <td>{codigoIdentificacion}</td>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+            <div className="grid-item-epps">{mensajeProteccion}</div>
+            <div className="grid-item-epps">{codigoIdentificacion}</div>
+          </div>
+        </div>
+
     </div>
     
   );
