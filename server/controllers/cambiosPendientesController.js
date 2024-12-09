@@ -142,8 +142,8 @@ const confirmarAgregados = async (req, res) => {
 
 // Confirmar modificados (edición masiva con transacción)
 const confirmarModificados = async (req, res) => {
-  const registrosModificados = req.body; // Recibir los registros desde el request
-  const sequelize = MgapPest.sequelize; // Instancia de Sequelize
+  const registrosModificados = req.body; 
+  const sequelize = MgapPest.sequelize; 
 
   console.log('Registros recibidos para modificar:', registrosModificados);
 
