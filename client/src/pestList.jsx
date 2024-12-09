@@ -23,7 +23,7 @@ function PestList() {
   // Función para obtener los pesticidas desde la API
   const fetchPesticidas = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/pesticidas');
+      const response = await axios.get('http://34.39.142.103:5000/api/pesticidas');
       setPesticidas(response.data);
     } catch (error) {
       console.error('Error al cargar los pesticidas:', error);
@@ -47,7 +47,7 @@ function PestList() {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/api/pesticidas/${pestId}`)
+        axios.delete(`http://34.39.142.103:5000/api/pesticidas/${pestId}`)
           .then(() => {
             setPesticidas(pesticidas.filter(pesticida => pesticida.id !== pestId));
             Swal.fire('Eliminado!', 'El pesticida ha sido eliminado.', 'success');

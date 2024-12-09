@@ -131,7 +131,7 @@ function TasaAplicacion() {
 // Llamada a la API's para obtener los datos de necesarios para los calculos
 const obtenerDatosAPI = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/api/tasas-dilucion');
+    const response = await axios.get('http://34.39.142.103:5000/api/tasas-dilucion');
     const datos = response.data;
 
     // Filtrar los datos para encontrar el registro que coincida con Unidades_tasa_aplicacion_1
@@ -155,7 +155,7 @@ const obtenerDatosAPI = async () => {
 
     const fetchRefCodigos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/ref-codigos-form');
+        const response = await axios.get('http://34.39.142.103:5000/api/ref-codigos-form');
         setRefCodigos(response.data);  // Guardar los datos en el estado
 
         // Comparar el codigo del pesticida seleccionado con los datos obtenidos
@@ -176,7 +176,7 @@ const obtenerDatosAPI = async () => {
 
     const fetchFilterPests = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/filter-pest');
+        const response = await fetch('http://34.39.142.103:5000/api/filter-pest');
         if (!response.ok) {
           throw new Error('Error al obtener los datos de la API filter-pest');
         }
@@ -203,7 +203,7 @@ const obtenerDatosAPI = async () => {
   
       if (pesticida.Sustancia_Activa_1) {
         try {
-          const response = await axios.get('http://localhost:5000/api/pesticidas/codigo-fechas', {
+          const response = await axios.get('http://34.39.142.103:5000/api/pesticidas/codigo-fechas', {
             params: { ingrediente: pesticida.Sustancia_Activa_1 }
           });
           setCodigoFechas(response.data.codigo_fecha);

@@ -22,7 +22,7 @@ function UserForm() {
 
     try {
       // Llamada al backend para agregar el usuario
-      const response = await axios.post('http://localhost:5000/api/users/agregar', formData);
+      const response = await axios.post('http://34.39.142.103:5000/api/users/agregar', formData);
       console.log('Respuesta del servidor:', response.data);
       navigate('/usuarios'); // Redirigir a la lista de usuarios
     } catch (error) {

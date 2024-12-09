@@ -15,7 +15,7 @@ const GoogleCallback = () => {
     const handleGoogleLogin = async () => {
       try {
         // Envía el código al backend para obtener el token
-        const response = await axios.post('http://localhost:5000/api/users/google-login', { code });
+        const response = await axios.post('http://34.39.142.103:5000/api/users/google-login', { code });
 
         const { token, user } = response.data;
 

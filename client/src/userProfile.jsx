@@ -42,7 +42,7 @@ function UserProfile() {
     try {
       // Llamada al backend para actualizar el perfil del usuario
       console.log("ID a actualizar:", user.Id);
-      const response = await axios.put(`http://localhost:5000/api/users/perfil/${user.Id}`, formData);
+      const response = await axios.put(`http://34.39.142.103:5000/api/users/perfil/${user.Id}`, formData);
       console.log('Usuario actualizado:', response.data);
       localStorage.setItem('usuario', JSON.stringify(response.data));
       login(response.data, localStorage.getItem('token'));

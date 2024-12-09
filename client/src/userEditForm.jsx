@@ -20,7 +20,7 @@ function EditUserForm() {
     //console.log("ID recibido:", id); 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/users/user/${id}`);
+        const response = await axios.get(`http://34.39.142.103:5000/api/users/user/${id}`);
         const fetchedUser = response.data;
         setFormData({
           Nombre: fetchedUser.Nombre,
@@ -47,7 +47,7 @@ function EditUserForm() {
 
     try {
       // Llamada al backend para actualizar el usuario
-      const response = await axios.put(`http://localhost:5000/api/users/editar/${id}`, formData);
+      const response = await axios.put(`http://34.39.142.103:5000/api/users/editar/${id}`, formData);
       console.log('Usuario actualizado:', response.data);
       navigate('/usuarios'); 
     } catch (error) {

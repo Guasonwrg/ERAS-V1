@@ -81,7 +81,6 @@ function App() {
           <Route path="/descargar" element={<DescargarExcel />} /> 
           <Route path="/ejecutar-script" element={<EjecutarScript />} />
 
-          {/* Asegúrate de agregar aquí cualquier otra ruta que necesites */}
         </Routes>
         <Footer />
       </AuthProvider>

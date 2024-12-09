@@ -11,7 +11,7 @@ function VerPesticida() {
   useEffect(() => {
     const fetchPesticida = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/pesticidas/pesticida/${id}`);
+        const response = await axios.get(`http://34.39.142.103:5000/api/pesticidas/pesticida/${id}`);
         setPesticida(response.data);
       } catch (error) {
         console.error('Error al obtener el pesticida:', error);
