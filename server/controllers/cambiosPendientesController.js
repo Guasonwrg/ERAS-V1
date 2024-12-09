@@ -140,17 +140,15 @@ const confirmarAgregados = async (req, res) => {
   }
 };
 
-
-
-
 // Confirmar modificados (edición masiva con transacción)
 const confirmarModificados = async (req, res) => {
-  const registrosModificados = req.body; // Recibir los registros del request
-  console.log('Registros recibidos para modificar:', registrosModificados);
+  const registrosModificados = req.body; // Recibir los registros desde el request
   const sequelize = MgapPest.sequelize; // Instancia de Sequelize
 
+  console.log('Registros recibidos para modificar:', registrosModificados);
+
   try {
-    // Validación de datos antes de la transacción
+    // Validar que el payload tenga registros
     if (!Array.isArray(registrosModificados) || registrosModificados.length === 0) {
       return res.status(400).json({ message: 'No se proporcionaron registros válidos para modificar.' });
     }
@@ -161,67 +159,69 @@ const confirmarModificados = async (req, res) => {
       const actualizaciones = [];
 
       for (const registro of registrosModificados) {
-        console.log('Registro actualizando:', registro);
+        console.log('Procesando registro:', registro);
 
-        // Validar que cada registro tenga un 'Registro' (clave única)
-        if (!registro.Registro) {
-          throw new Error(`Registro inválido: ${JSON.stringify(registro)}`);
+        // Validar que cada registro tenga "Registro" y "DatosCompletos"
+        if (!registro.Registro || !registro.DatosCompletos) {
+          console.error(`Registro inválido o faltan datos completos: ${JSON.stringify(registro)}`);
+          registrosNoEncontrados.push(registro.Registro);
+          continue;
         }
 
-        // Verificar si existe el registro en la base de datos
+        // Verificar si el registro existe en la base de datos
         const existe = await MgapPest.findOne({
           where: { Registro: registro.Registro },
           transaction: t,
         });
 
         if (existe) {
-          // Preparar los datos para la actualización en un solo objeto
+          // Preparar los datos actualizados desde DatosCompletos
+          const datosActualizados = {
+            Nombre_Comercial: registro.DatosCompletos['Nombre Comercial'] || existe.Nombre_Comercial,
+            Aptitud: registro.DatosCompletos.Aptitud || existe.Aptitud,
+            Sustancia_Activa_1: registro.DatosCompletos['Sustancia Activa -1-'] || existe.Sustancia_Activa_1,
+            Activo_Contenido_1: registro.DatosCompletos['Activo Contenido -1-'] || existe.Activo_Contenido_1,
+            Unidades_1: registro.DatosCompletos['Medida 1'] || existe.Unidades_1,
+            Sustancia_Activa_2: registro.DatosCompletos['Sustancia Activa -2-'] || existe.Sustancia_Activa_2,
+            Activo_Contenido_2: registro.DatosCompletos['Activo Contenido -2-'] || existe.Activo_Contenido_2,
+            Unidades_2: registro.DatosCompletos['Medida 2'] || existe.Unidades_2,
+            Sustancia_Activa_3: registro.DatosCompletos['Sustancia Activa -3-'] || existe.Sustancia_Activa_3,
+            Activo_Contenido_3: registro.DatosCompletos['Activo Contenido -3-'] || existe.Activo_Contenido_3,
+            Unidades_3: registro.DatosCompletos['Medida 3'] || existe.Unidades_3,
+            Sustancia_Activa_4: registro.DatosCompletos['Sustancia Activa -4-'] || existe.Sustancia_Activa_4,
+            Activo_Contenido_4: registro.DatosCompletos['Activo Contenido -4-'] || existe.Activo_Contenido_4,
+            Unidades_4: registro.DatosCompletos['Medida 4'] || existe.Unidades_4,
+            Formulacion: registro.DatosCompletos.Formulacion || existe.Formulacion,
+            Toxicologia: registro.DatosCompletos.Toxicologia || existe.Toxicologia,
+            Vencimiento: registro.DatosCompletos.Vencimiento || existe.Vencimiento,
+            Estado: registro.DatosCompletos.Estado || existe.Estado,
+            Receta: registro.DatosCompletos.Receta || existe.Receta,
+            Empresa_Razon_Social: registro.DatosCompletos['Empresa Razon Social'] || existe.Empresa_Razon_Social,
+            Pais: registro.DatosCompletos['País'] || existe.Pais,
+            Pais_2: registro.DatosCompletos['País2'] || existe.Pais_2,
+            Pais_3: registro.DatosCompletos['País3'] || existe.Pais_3,
+            Pais_4: registro.DatosCompletos['País4'] || existe.Pais_4,
+            Fecha_dato_MGAP: registro.DatosCompletos.Fecha_dato_MGAP || existe.Fecha_dato_MGAP,
+            Observaciones: registro.DatosCompletos.Observaciones || existe.Observaciones,
+            Codigo: registro.DatosCompletos.Codigo || existe.Codigo,
+            Rango_aplicacion: registro.DatosCompletos.Rango_aplicacion || existe.Rango_aplicacion,
+            Unidades_ra: registro.DatosCompletos.Unidades_ra || existe.Unidades_ra,
+            Otros_pa: registro.DatosCompletos.Otros_pa || existe.Otros_pa,
+          };
+
+          // Agregar la actualización a la lista
           actualizaciones.push(
-            MgapPest.update(
-              {
-                Nombre_Comercial: registro['nombre comercial'] || existe.Nombre_Comercial,
-                Aptitud: registro.aptitud || existe.Aptitud,
-                Sustancia_Activa_1: registro['sustancia activa -1-'] || existe.Sustancia_Activa_1,
-                Activo_Contenido_1: registro['activo contenido -1-'] || existe.Activo_Contenido_1,
-                Unidades_1: registro.Unidades_1 || existe.Unidades_1,
-                Sustancia_Activa_2: registro['sustancia activa -2-'] || existe.Sustancia_Activa_2,
-                Activo_Contenido_2: registro['activo contenido -2-'] || existe.Activo_Contenido_2,
-                Unidades_2: registro.Unidades_2 || existe.Unidades_2,
-                Sustancia_Activa_3: registro['sustancia activa -3-'] || existe.Sustancia_Activa_3,
-                Activo_Contenido_3: registro['activo contenido -3-'] || existe.Activo_Contenido_3,
-                Unidades_3: registro.Unidades_3 || existe.Unidades_3,
-                Sustancia_Activa_4: registro['sustancia activa -4-'] || existe.Sustancia_Activa_4,
-                Activo_Contenido_4: registro['activo contenido -4-'] || existe.Activo_Contenido_4,
-                Unidades_4: registro.Unidades_4 || existe.Unidades_4,
-                Formulacion: registro.Formulacion || existe.Formulacion,
-                Toxicologia: registro.Toxicologia || existe.Toxicologia,
-                Vencimiento: registro.Vencimiento || existe.Vencimiento,
-                Estado: registro.Estado || existe.Estado,
-                Receta: registro.Receta || existe.Receta,
-                Empresa_Razon_Social: registro['empresa razon social'] || existe.Empresa_Razon_Social,
-                Pais: registro['país'] || existe.Pais,
-                Pais_2: registro['país2'] || existe.Pais_2,
-                Pais_3: registro['país3'] || existe.Pais_3,
-                Pais_4: registro['país4'] || existe.Pais_4,
-                Fecha_dato_MGAP: registro.Fecha_dato_MGAP || existe.Fecha_dato_MGAP,
-                Observaciones: registro.Observaciones || existe.Observaciones,
-                Codigo: registro.Codigo || existe.Codigo,
-                Rango_aplicacion: registro.Rango_aplicacion || existe.Rango_aplicacion,
-                Unidades_ra: registro.Unidades_ra || existe.Unidades_ra,
-                Otros_pa: registro.Otros_pa || existe.Otros_pa,
-              },
-              {
-                where: { Registro: registro.Registro },
-                transaction: t,
-              }
-            )
+            MgapPest.update(datosActualizados, {
+              where: { Registro: registro.Registro },
+              transaction: t,
+            })
           );
         } else {
           registrosNoEncontrados.push(registro.Registro);
         }
       }
 
-      // Ejecutar todas las actualizaciones en paralelo
+      // Ejecutar las actualizaciones en paralelo
       await Promise.all(actualizaciones);
 
       // Actualizar el informe de cambios
@@ -259,8 +259,6 @@ const confirmarModificados = async (req, res) => {
     res.status(500).json({ message: 'Error al modificar registros.', error });
   }
 };
-
-
 
 // Confirmar agregado individual
 const confirmarAgregadoIndividual = async (req, res) => {
@@ -362,55 +360,85 @@ const confirmarAgregadoIndividual = async (req, res) => {
   }
 };
 
-
 // Confirmar modificado individual
 const confirmarModificadoIndividual = async (req, res) => {
   const { Registro, modificaciones } = req.body;
 
   try {
-    // Validación de entrada
     if (!Registro || !modificaciones) {
       return res.status(400).json({ message: 'El registro y las modificaciones son necesarios.' });
     }
 
-    // 1. Buscar la PK_pest usando el Registro
+    // Buscar registro existente
     const registroExistente = await MgapPest.findOne({ where: { Registro } });
     if (!registroExistente) {
       return res.status(404).json({ message: 'Registro no encontrado en MgapPest.' });
     }
 
-    // 2. Actualizar el registro con los datos de modificaciones
-    await registroExistente.update(modificaciones);
+    // Preparar modificaciones con claves correctas
+    const modificacionesForzadas = {
+      Nombre_Comercial: modificaciones['Nombre Comercial'],
+      Aptitud: modificaciones.Aptitud,
+      Sustancia_Activa_1: modificaciones['Sustancia Activa -1-'],
+      Activo_Contenido_1: modificaciones['Activo Contenido -1-'],
+      Unidades_1: modificaciones['Medida 1'],
+      Sustancia_Activa_2: modificaciones['Sustancia Activa -2-'] || null,
+      Activo_Contenido_2: modificaciones['Activo Contenido -2-'] || null,
+      Unidades_2: modificaciones['Medida 2'] || null,
+      Sustancia_Activa_3: modificaciones['Sustancia Activa -3-'] || null,
+      Activo_Contenido_3: modificaciones['Activo Contenido -3-'] || null,
+      Unidades_3: modificaciones['Medida 3'] || null,
+      Sustancia_Activa_4: modificaciones['Sustancia Activa -4-'] || null,
+      Activo_Contenido_4: modificaciones['Activo Contenido -4-'] || null,
+      Unidades_4: modificaciones['Medida 4'] || null,
+      Formulacion: modificaciones.Formulacion || null,
+      Toxicologia: modificaciones.Toxicologia || null,
+      Vencimiento: modificaciones.Vencimiento || null,
+      Estado: modificaciones.Estado || null,
+      Receta: modificaciones.Receta || null,
+      Empresa_Razon_Social: modificaciones['Empresa Razon Social'] || null,
+      Pais: modificaciones['País'] || null,
+      Pais_2: modificaciones['País2'] || null,
+      Pais_3: modificaciones['País3'] || null,
+      Pais_4: modificaciones['País4'] || null,
+      Fecha_dato_MGAP: modificaciones.Fecha_dato_MGAP || null,
+      Observaciones: modificaciones.Observaciones || null,
+      Codigo: modificaciones.Codigo || null,
+      Rango_aplicacion: modificaciones.Rango_aplicacion || null,
+      Unidades_ra: modificaciones.Unidades_ra || null,
+      Otros_pa: modificaciones.Otros_pa || null,
+    };
+    // Limpiar datos nulos o no definidos
+    Object.keys(modificacionesForzadas).forEach((key) => {
+      if (modificacionesForzadas[key] === null || modificacionesForzadas[key] === undefined) {
+        delete modificacionesForzadas[key];
+      }
+    });
 
-    // 3. Buscar el informe de cambios pendiente y actualizar el campo `modificados`
+    // Actualizar registro
+    const [affectedRows] = await MgapPest.update(modificacionesForzadas, {
+      where: { Registro },
+    });
+
+    if (affectedRows === 0) {
+      console.warn(`No se actualizó ninguna fila para el Registro: ${Registro}`);
+      return res.status(400).json({ message: 'No se realizaron cambios en el registro.' });
+    }
+
+    // Actualizar informe de cambios
     const informeCambio = await InformeCambios.findOne({
       where: { estado: 'pendiente' },
       order: [['id', 'DESC']],
     });
 
     if (informeCambio) {
-      let detalles;
-      try {
-        detalles = JSON.parse(informeCambio.detalles);
-      } catch (error) {
-        console.error("Error al parsear 'detalles' como JSON:", error);
-        detalles = { agregados: [], modificados: [], eliminados: [] };
-      }
-
-      // Asegurarse de que `modificados` es un array
-      detalles.modificados = Array.isArray(detalles.modificados) ? detalles.modificados : [];
-
-      // Filtrar el objeto correspondiente al `Registro` del conjunto `modificados`
+      let detalles = JSON.parse(informeCambio.detalles || '{}');
       detalles.modificados = detalles.modificados.filter((item) => item.Registro !== Registro);
 
-      // Actualizar el estado si todos los conjuntos están vacíos
       const nuevoEstado = detalles.agregados.length === 0 &&
                           detalles.modificados.length === 0 &&
-                          detalles.eliminados.length === 0 ? 
-                          'confirmado' : 
-                          'pendiente';
+                          detalles.eliminados.length === 0 ? 'confirmado' : 'pendiente';
 
-      // Guardar el `detalles` actualizado como cadena JSON y cambiar el estado si es necesario
       informeCambio.detalles = JSON.stringify(detalles);
       informeCambio.estado = nuevoEstado;
 
