@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../src/Styles/LoginPage.css'; 
 import { useAuth } from './authContext'; 
 import { GoogleLogin } from '@react-oauth/google';
-import { toast, ToastContainer } from 'react-toastify'; // Importar React-Toastify
+import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
 
 function LoginPage() {
@@ -16,7 +16,7 @@ function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/users/ingresar', {
+      const response = await axios.post('http://34.39.142.103:5000/api/users/ingresar', {
         Email,
         Contraseña,
       });
@@ -31,12 +31,12 @@ function LoginPage() {
   
         // Verificar si el usuario es Admin y si hay cambios pendientes
         if (user.Rol === 'Admin' && tieneCambiosPendientes) {
-          toast.info('Tienes cambios pendientes por revisar. Haz clic para verlos.', {
+          toast.info('Hay cambios en los pesticidas. Haz clic para verlos.', {
             onClick: () => navigate('/cambios-pendientes'),
             autoClose: false,
           });
         } else {
-          navigate('/user'); // Redirigir al perfil si no hay cambios pendientes o el usuario no es Admin
+          navigate('/user'); 
         }
       } else {
         console.error('No se recibió token');
@@ -58,7 +58,7 @@ function LoginPage() {
     try {
       const { credential } = credentialResponse;
 
-      const response = await axios.post('http://localhost:5000/api/users/google-login', {
+      const response = await axios.post('http://34.39.142.103:5000/api/users/google-login', {
         token: credential,
       });
 
@@ -69,7 +69,7 @@ function LoginPage() {
       login(user, token);
 
       if (user.Rol === 'Admin' && tieneCambiosPendientes) {
-        toast.info('Tienes cambios pendientes por revisar. Haz clic para verlos.', {
+        toast.info('Hay cambios en los pesticidas. Haz clic para verlos.', {
           onClick: () => navigate('/cambios-pendientes'),
           autoClose: false,
         });
