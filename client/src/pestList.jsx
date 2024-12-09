@@ -175,21 +175,15 @@ function PestList() {
               <p><strong>Nombre Comercial:</strong> {selectedPesticida.Nombre_Comercial}</p>
               <p><strong>Aptitud:</strong> {selectedPesticida.Aptitud}</p>
               <p><strong>Sustancia Activa 1:</strong> {selectedPesticida.Sustancia_Activa_1}</p>
-              <p><strong>Activo Contenido 1:</strong> {selectedPesticida.Activo_Contenido_1}</p>
-              <p><strong>Unidades 1:</strong> {selectedPesticida.Unidades_1}</p>
+              <p><strong>Activo Contenido 1:</strong> {`${selectedPesticida.Activo_Contenido_1} ${selectedPesticida.Unidades_1}`}</p>
               <p><strong>Sustancia Activa 2:</strong> {selectedPesticida.Sustancia_Activa_2}</p>
-            </div>
-            <div className="modal-column">
-              <p><strong>Activo Contenido 2:</strong> {selectedPesticida.Activo_Contenido_2}</p>
-              <p><strong>Unidades 2:</strong> {selectedPesticida.Unidades_2}</p>
+              <p><strong>Activo Contenido 2:</strong> {`${selectedPesticida.Activo_Contenido_2} ${selectedPesticida.Unidades_2}`}</p>
               <p><strong>Sustancia Activa 3:</strong> {selectedPesticida.Sustancia_Activa_3}</p>
-              <p><strong>Activo Contenido 3:</strong> {selectedPesticida.Activo_Contenido_3}</p>
-              <p><strong>Unidades 3:</strong> {selectedPesticida.Unidades_3}</p>
+              <p><strong>Activo Contenido 3:</strong> {`${selectedPesticida.Activo_Contenido_3} ${selectedPesticida.Unidades_3}`}</p>
               <p><strong>Sustancia Activa 4:</strong> {selectedPesticida.Sustancia_Activa_4}</p>
-              <p><strong>Activo Contenido 4:</strong> {selectedPesticida.Activo_Contenido_4}</p>
+              <p><strong>Activo Contenido 4:</strong> {`${selectedPesticida.Activo_Contenido_4} ${selectedPesticida.Unidades_4}`}</p>
             </div>
             <div className="modal-column">
-              <p><strong>Unidades 4:</strong> {selectedPesticida.Unidades_4}</p>
               <p><strong>Formulación:</strong> {selectedPesticida.Formulacion}</p>
               <p><strong>Toxicología:</strong> {selectedPesticida.Toxicologia}</p>
               <p><strong>Vencimiento:</strong> {selectedPesticida.Vencimiento}</p>
@@ -204,6 +198,7 @@ function PestList() {
           </div>
         )}
       </Modal>
+
     </div>
   );
 }

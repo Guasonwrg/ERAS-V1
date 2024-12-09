@@ -30,13 +30,13 @@ export const AuthProvider = ({ children }) => {
   // Verificar el token cuando se carga la página
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log("Token desde localStorage:", token);
+    //console.log("Token desde localStorage:", token);
     const usuario = JSON.parse(localStorage.getItem('usuario'));
-    console.log("Usuario desde localStorage:", usuario);
+    //console.log("Usuario desde localStorage:", usuario);
     if (token && usuario) {
       try {
         const decodedToken = jwtDecode(token);
-        console.log("Token decodificado:", decodedToken);
+       // console.log("Token decodificado:", decodedToken);
         const currentTime = Date.now() / 1000;
         if (decodedToken.exp < currentTime) {
           logout(); // Si el token ha expirado, cerrar sesión
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
           setUser(usuario); 
         }
       } catch (error) {
-        console.error("Token inválido:", error);
+        //console.error("Token inválido:", error);
         logout();
       }
     }

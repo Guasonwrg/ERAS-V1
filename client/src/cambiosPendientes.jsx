@@ -94,9 +94,11 @@ const CambiosPendientes = () => {
       setMensaje(`Todos los registros de ${activeTab} fueron confirmados exitosamente.`);
   
       if (activeTab === 'agregados') {
-        setAgregados([]); // Limpiar la lista de agregados
+        const registrosConfirmados = data.map((item) => item.Registro);
+        setAgregados(agregados.filter((item) => !registrosConfirmados.includes(item.Registro)));
       } else if (activeTab === 'modificados') {
-        setModificados([]); // Limpiar la lista de modificados
+        const registrosConfirmados = data.map((item) => item.Registro);
+        setModificados(modificados.filter((item) => !registrosConfirmados.includes(item.Registro)));
       }
     } catch (error) {
       console.error(`Error al confirmar todos los registros de ${activeTab}:`, error);
@@ -109,16 +111,19 @@ const CambiosPendientes = () => {
     try {
         let url;
         let payload;
-        console.log("Registro enviado:", registro); 
+        let method;
+        //console.log("Registro enviado:", registro); 
 
         switch (tipo) {
             case 'agregados':
                 url = 'http://localhost:5000/api/cambios-pendientes/confirmar-agregado';
                 payload = { ...registro }; 
+                method = 'post';
                 break;
             case 'modificados':
                 url = 'http://localhost:5000/api/cambios-pendientes/confirmar-modificado';
                 payload = { Registro: registro.Registro || registro.DatosCompletos.Registro, modificaciones: registro.DatosCompletos || registro };
+                method = 'put';
                 break;
             case 'eliminados':
                 const confirmResult = await Swal.fire({
@@ -137,26 +142,32 @@ const CambiosPendientes = () => {
                 
                 url = 'http://localhost:5000/api/cambios-pendientes/confirmar-eliminado';
                 payload = { PK_pest: registro.PK_pest };
+                method = 'delete';
                 break;
             default:
                 return;
         }
 
-        console.log("Payload a enviar:", payload); // Para verificar el payload
+       // console.log("Payload a enviar:", payload); // Para verificar el payload
 
-        // Realiza la solicitud POST al backend
-        await axios.post(url, payload);
+       await axios({
+        method: method,
+        url: url,
+        data: payload
+      });
+    
 
         setMensaje(`Registro ${tipo.slice(0, -1)} confirmado exitosamente.`);
 
         // Actualiza el estado local para eliminar el registro confirmado
         if (tipo === 'agregados') {
-            setAgregados(agregados.filter((item) => item.Registro !== registro.Registro));
+          setAgregados((prev) => prev.filter((item) => item.Registro !== registro.Registro));
         } else if (tipo === 'modificados') {
-            setModificados(modificados.filter((item) => item.PK_pest !== registro.PK_pest));
+            setModificados((prev) => prev.filter((item) => item.Registro !== registro.Registro));
         } else {
-            setEliminados(eliminados.filter((item) => item.PK_pest !== registro.PK_pest));
+            setEliminados((prev) => prev.filter((item) => item.Registro !== registro.Registro));
         }
+      
     } catch (error) {
         console.error(`Error al confirmar ${tipo.slice(0, -1)}:`, error);
         setMensaje(`Error al confirmar ${tipo.slice(0, -1)}.`);

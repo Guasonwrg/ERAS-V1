@@ -87,10 +87,12 @@ function AgregarPesticida() {
   return (
     <div>
       <h1>Agregar Nuevo Pesticida</h1>
+      <p style={{ fontSize: '14px', color: '#555' }}>
+        Los campos marcados con <span style={{ color: 'red' }}>*</span> son obligatorios.
+      </p>
       <form className="form-grid">
-        {/* Columna 1 */}
         <div className="form-column">
-          <label>Registro:</label>
+        <label>Registro:<span style={{ color: 'red' }}>*</span></label>
           <input
             type="text"
             name="Registro"
@@ -99,7 +101,7 @@ function AgregarPesticida() {
             required
             className={errores.Registro ? 'input-error' : ''}
           />
-        <label>Nombre Comercial:</label>
+        <label>Nombre Comercial:<span style={{ color: 'red' }}>*</span></label>
         <input
             type="text"
             name="Nombre_Comercial"
@@ -110,7 +112,7 @@ function AgregarPesticida() {
         />
 
 
-          <label>Aptitud:</label>
+          <label>Aptitud:<span style={{ color: 'red' }}>*</span></label>
           <input
             type="text"
             name="Aptitud"
@@ -120,7 +122,7 @@ function AgregarPesticida() {
             className={errores.Aptitud ? 'input-error' : ''}
           />
 
-          <label>Sustancia Activa 1:</label>
+          <label>Sustancia Activa 1:<span style={{ color: 'red' }}>*</span></label>
           <input
             type="text"
             name="Sustancia_Activa_1"
@@ -130,7 +132,7 @@ function AgregarPesticida() {
             className={errores.Sustancia_Activa_1 ? 'input-error' : ''}
           />
 
-          <label>Activo Contenido 1:</label>
+          <label>Activo Contenido 1:<span style={{ color: 'red' }}>*</span></label>
           <input
             type="text"
             name="Activo_Contenido_1"
@@ -140,7 +142,7 @@ function AgregarPesticida() {
             className={errores.Activo_Contenido_1 ? 'input-error' : ''}
           />
 
-          <label>Unidades 1:</label>
+          <label>Unidades 1:<span style={{ color: 'red' }}>*</span></label>
           <input
             type="text"
             name="Unidades_1"
@@ -150,7 +152,7 @@ function AgregarPesticida() {
             className={errores.Unidades_1 ? 'input-error' : ''}
           />
         </div>
-        {/* Columna 2 */}
+
         <div className="form-column">
           <label>Sustancia Activa 2:</label>
           <input type="text" name="Sustancia_Activa_2" value={form.Sustancia_Activa_2} onChange={handleChange} />

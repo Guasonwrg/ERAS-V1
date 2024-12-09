@@ -103,20 +103,9 @@ function InformesList() {
                 <td>{informe.categoria_objetivo}</td>
                 <td>{empresa}</td>
                 <td>{new Date(informe.fecha_hora).toLocaleString()}</td>
-                <td>
-                <button
-                    className="btn-edit"
-                    onClick={() => navigate(`/editar-ocupacional/${informe.id}`)}
-                    >
-                    Ver
-                </button>
-
-                  <button
-                    className="btn-delete"
-                    onClick={() => handleDelete(informe.id)}
-                  >
-                    Eliminar
-                  </button>
+                <td class="acciones">
+                    <button class="btn-edit" onClick={() => navigate(`/editar-ocupacional/${informe.id}`)}>Ver</button>
+                    <button class="btn-delete" onClick={() => handleDelete(informe.id)}>Eliminar</button>
                 </td>
               </tr>
             ))

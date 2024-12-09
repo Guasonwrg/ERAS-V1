@@ -56,14 +56,7 @@
     margin: 0 auto;
     width: fit-content;
   }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #ffffff;
-  }
-  
+
   .logo img {
     width: 133px;
     height: 77px;

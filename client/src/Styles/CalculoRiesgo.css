@@ -279,4 +279,107 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
+  /* Pantallas menores a 768px (tablets y móviles en orientación vertical) */
+@media (max-width: 768px) {
+  /* General container */
+  .calculo-riesgo-container {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  /* Encabezados */
+  h2, h3 {
+    font-size: 1.2em; /* Reducir tamaño de los títulos */
+    padding: 8px;
+    text-align: center;
+  }
+
+  /* Tablas */
+  table {
+    font-size: 14px; /* Reducir tamaño de texto */
+  }
+
+  th, td {
+    padding: 8px; /* Reducir padding en tablas */
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 14px; /* Ajustar el tamaño de fuente */
+  }
+
+  /* Grids */
+  .grid-container-suelo,
+  .grid-container-zonas-sensibles,
+  .grid-container-derramados,
+  .grid-container-infraestructura {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    gap: 10px; /* Espaciado entre elementos */
+  }
+
+  /* Botones */
+  button {
+    font-size: 14px;
+    padding: 8px 10px; /* Reducir el padding de los botones */
+    width: 100%; /* Asegurar que ocupen todo el ancho */
+    margin-bottom: 10px; /* Espaciado adicional entre botones */
+  }
+
+  /* Inputs y selects dentro de grids */
+  .grid-item-suelo select,
+  .grid-item-suelo input,
+  .grid-item-zonas-sensibles input,
+  .grid-item-derramados input,
+  .grid-item-infraestructura input,
+  .grid-item-infraestructura select {
+    font-size: 12px; /* Reducir más el tamaño de texto */
+  }
+}
+
+/* Pantallas menores a 576px (móviles pequeños) */
+@media (max-width: 576px) {
+  /* General container */
+  .calculo-riesgo-container {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  /* Encabezados */
+  h2, h3 {
+    font-size: 1em; /* Reducir más el tamaño de los títulos */
+    text-align: left; /* Alinear a la izquierda en pantallas muy pequeñas */
+    margin-bottom: 10px;
+  }
+
+  /* Inputs y selects */
+  input, select {
+    font-size: 12px; /* Reducir el tamaño de texto */
+    padding: 6px; /* Ajustar el padding */
+  }
+
+  /* Grids */
+  .grid-container-suelo,
+  .grid-container-zonas-sensibles,
+  .grid-container-derramados,
+  .grid-container-infraestructura {
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 5px; /* Espaciado reducido */
+  }
+
+  /* Tablas */
+  table {
+    font-size: 12px; /* Reducir más el tamaño de texto */
+  }
+
+  th, td {
+    padding: 6px; /* Reducir más el padding */
+  }
+
+  /* Botones */
+  button {
+    font-size: 12px;
+    padding: 6px 8px; /* Botones más pequeños */
+    margin-bottom: 8px;
+  }
+}

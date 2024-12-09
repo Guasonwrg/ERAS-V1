@@ -1,11 +1,11 @@
 .actividad-diaria-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
   
   h2 {
     text-align: center;
@@ -45,41 +45,9 @@
   }
   .actividad-diaria {
     margin: 20px;
-  }
-  .actividad-diaria h3 {
-    font-size: 1.5em;
-    text-align: center;
-    margin-bottom: 20px;
-    color: white;
-    background-color: #007bff;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  /* Contenedor principal */
-  .grid-container-diaria {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  .grid-header-diaria {
-    font-weight: bold;
-    font-size: 15px;
-    background-color: #e9e9e9;
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-  }
-  .grid-item-diaria {
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  .actividad-diaria-tratada {
-    margin: 20px;
 }
-.actividad-diaria-tratada h3 {
+
+.actividad-diaria h3 {
     font-size: 1.5em;
     text-align: center;
     margin-bottom: 20px;
@@ -87,6 +55,50 @@
     background-color: #007bff;
     padding: 10px;
     border-radius: 4px;
+}
+
+.grid-container-diaria {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.grid-header-diaria {
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #e9e9e9;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  border-radius: 4px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-item-diaria {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .grid-container-diaria {
+      grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-header-diaria,
+  .grid-item-diaria {
+      text-align: left;
+  }
 }
 
 /* Contenedor principal */
@@ -204,6 +216,3 @@ select {
   border-radius: 4px;
   border: 1px solid #ccc;
 }
-
-
-  
