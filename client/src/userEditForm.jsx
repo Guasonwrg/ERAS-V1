@@ -48,7 +48,7 @@ function EditUserForm() {
     try {
       // Llamada al backend para actualizar el usuario
       const response = await axios.put(`http://localhost:5000/api/users/editar/${id}`, formData);
-      console.log('Usuario actualizado:', response.data);
+      //console.log('Usuario actualizado:', response.data);
       navigate('/usuarios'); 
     } catch (error) {
       console.error('Error al actualizar usuario:', error);

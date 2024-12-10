@@ -39,7 +39,7 @@ function EditarPesticida() {
     const fetchPesticida = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/pesticidas/pesticida/${PK_Pest}`);
-        console.log('Datos de pesticida:', response.data); // Verifica si los datos se muestran en la consola
+        //console.log('Datos de pesticida:', response.data); 
         setForm(response.data);
       } catch (error) {
         console.error('Error al cargar el pesticida:', error);
@@ -64,7 +64,7 @@ function EditarPesticida() {
         navigate('/pesticidas-abm'); // Redirige después de un tiempo
       }, 2000);
     } catch (error) {
-      console.error('Error al actualizar el pesticida:', error);
+      //console.error('Error al actualizar el pesticida:', error);
       setMensaje({ tipo: 'error', texto: 'Error al guardar los cambios.' });
     }
   };

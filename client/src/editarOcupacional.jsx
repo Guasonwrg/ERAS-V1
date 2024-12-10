@@ -30,7 +30,7 @@ function VerOcupacional() {
     const fetchInformeData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/informes-ocupacional/${id}`);
-        console.log('Datos recibidos:', response.data);
+        //console.log('Datos recibidos:', response.data);
         setFormData(response.data); // Cargar los datos del informe en el estado
       } catch (error) {
         console.error('Error al cargar los datos del informe:', error);

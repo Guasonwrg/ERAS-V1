@@ -22,7 +22,7 @@ function LoginPage() {
       });
   
       const { token, user, tieneCambiosPendientes } = response.data;
-      console.log(tieneCambiosPendientes);
+      //console.log(tieneCambiosPendientes);
   
       if (token) {
         localStorage.setItem('token', token);
@@ -42,7 +42,7 @@ function LoginPage() {
         console.error('No se recibió token');
       }
     } catch (err) {
-      console.error(err);
+      //console.error(err);
       if (err.response && err.response.status === 401) {
         setError('Contraseña incorrecta');
       } else if (err.response && err.response.status === 404) {
@@ -63,7 +63,7 @@ function LoginPage() {
       });
 
       const { token, user, tieneCambiosPendientes } = response.data;
-      console.log(tieneCambiosPendientes);
+      //console.log(tieneCambiosPendientes);
       localStorage.setItem('token', token);
       localStorage.setItem('usuario', JSON.stringify(user));
       login(user, token);
@@ -74,10 +74,10 @@ function LoginPage() {
           autoClose: false,
         });
       } else {
-        navigate('/user'); // Redirigir al perfil si no hay cambios pendientes o el usuario no es Admin
+        navigate('/user'); 
       }
     } catch (err) {
-      console.error("Error en la autenticación con Google:", err);
+      //console.error("Error en la autenticación con Google:", err);
       setError('Error en la autenticación con Google');
     }
   };

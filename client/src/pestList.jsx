@@ -55,7 +55,7 @@ function PestList() {
           })
           .catch(error => {
             Swal.fire('Error', 'Hubo un problema al eliminar el pesticida.', 'error');
-            console.error("Hubo un error al eliminar el pesticida", error);
+            //console.error("Hubo un error al eliminar el pesticida", error);
           });
       }
     });

@@ -16,7 +16,7 @@ const EjecutarScript = () => {
                 setMensaje('Error al ejecutar el script.');
             }
         } catch (error) {
-            console.error('Error al ejecutar el script:', error);
+            //console.error('Error al ejecutar el script:', error);
             setMensaje('Hubo un error al ejecutar el script.');
         } finally {
             setLoading(false);

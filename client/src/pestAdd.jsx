@@ -40,7 +40,7 @@ function AgregarPesticida() {
     setForm({ ...form, [name]: value });
     setErrores((prevErrores) => {
       const nuevosErrores = { ...prevErrores, [name]: !value };
-      console.log('Actualizando errores:', nuevosErrores);
+      //console.log('Actualizando errores:', nuevosErrores);
       return nuevosErrores;
     });
   };
@@ -56,7 +56,7 @@ function AgregarPesticida() {
     });
   
     setErrores(nuevosErrores);
-    console.log('Errores después de validar:', nuevosErrores); // Verifica el estado de errores
+    //console.log('Errores después de validar:', nuevosErrores); 
     return Object.keys(nuevosErrores).length === 0;
   };
   

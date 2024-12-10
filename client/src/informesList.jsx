@@ -21,7 +21,7 @@ function InformesList() {
         if (token) {
           const decodedToken = parseJwt(token);
           setEmpresa(decodedToken?.Empresa);
-          console.log('Empresa:', decodedToken?.Empresa);
+          //console.log('Empresa:', decodedToken?.Empresa);
         }
         
 
@@ -30,10 +30,10 @@ function InformesList() {
             Authorization: `Bearer ${token}`, // Enviar el token en los headers
           },
         });
-        console.log('Informes obtenidos:', response.data);
+        //console.log('Informes obtenidos:', response.data);
         setInformes(response.data); // Guardar los informes en el estado
       } catch (error) {
-        console.error('Hubo un error al obtener los informes', error);
+        //console.error('Hubo un error al obtener los informes', error);
         Swal.fire('Error', 'Hubo un problema al obtener los informes.', 'error');
       }
     };
@@ -74,7 +74,7 @@ function InformesList() {
           })
           .catch(error => {
             Swal.fire('Error', 'Hubo un problema al eliminar el informe.', 'error');
-            console.error("Hubo un error al eliminar el informe", error);
+            //console.error("Hubo un error al eliminar el informe", error);
           });
       }
     });

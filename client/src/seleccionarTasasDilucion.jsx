@@ -79,7 +79,7 @@ function TasaAplicacion() {
 
     // Sincronizar estados individuales
     setTasaAplicacion(parsedTasaDilucion.tasaAplicacion || '');
-    console.log('Estado actualizado - tasaAplicacion:', parsedTasaDilucion.tasaAplicacion);
+    //console.log('Estado actualizado - tasaAplicacion:', parsedTasaDilucion.tasaAplicacion);
     setConcentracionSolucion(parsedTasaDilucion.concentracionSolucion || '');
     setTipoAreaTratamiento(parsedTasaDilucion.tipoAreaTratamiento || '');
     setAreaTratamiento(parsedTasaDilucion.areaTratamiento || '');
@@ -146,8 +146,8 @@ const obtenerDatosAPI = async () => {
       setError('No se encontró un registro coincidente.');
     }
   } catch (error) {
-    console.error('Error al obtener los datos de la API Tasas-dilucion:', error);
-    setError('Hubo un error al cargar los datos.');
+    //console.error('Error al obtener los datos de la API Tasas-dilucion:', error);
+    setError('Hubo un error al obtener los datos de la API Tasas-dilucion.');
   }
 };
     
@@ -167,8 +167,8 @@ const obtenerDatosAPI = async () => {
           }
         }
       } catch (err) {
-        console.error('Error al obtener los datos:', err);
-        setError('Hubo un problema al obtener los datos.');
+       // console.error('Error al obtener los datos:', err);
+        setError('Hubo un problema al obtener los datos de Ref Codigos Form.');
       }
     };
     
@@ -228,15 +228,15 @@ const obtenerDatosAPI = async () => {
   useEffect(() => {
     if (selectedTasaDilucion) {
       localStorage.setItem('selectedTasaDilucion', JSON.stringify(selectedTasaDilucion));
-      console.log('Guardado en localStorage:', localStorage.getItem('selectedTasaDilucion'));
+      //console.log('Guardado en localStorage:', localStorage.getItem('selectedTasaDilucion'));
     }
     if (selectedPesticida) {
       localStorage.setItem('selectedPesticida', JSON.stringify(selectedPesticida));
-      console.log('Guardado en localStorage:', localStorage.getItem('selectedPesticida'));
+      //console.log('Guardado en localStorage:', localStorage.getItem('selectedPesticida'));
     }
     if (selectedEscenario) {
       localStorage.setItem('selectedEscenario', JSON.stringify(selectedEscenario));
-      console.log('Guardado en localStorage:', localStorage.getItem('selectedEscenario'));
+      //console.log('Guardado en localStorage:', localStorage.getItem('selectedEscenario'));
     }
     if (selectedCoadyuvante) {
       localStorage.setItem('selectedCoadyuvante', JSON.stringify(selectedCoadyuvante));
@@ -371,13 +371,13 @@ const obtenerDatosAPI = async () => {
     if (!selectedPesticida || !selectedEscenario) return "Condición no válida";
   
     const contenidoActivo = parseFloat(selectedPesticida.Activo_Contenido_1);
-    console.log('contenido activo:',contenidoActivo)
+    //console.log('contenido activo:',contenidoActivo)
     const tasa = parseFloat(tasaAplicacion);
-    console.log(tasa)
+    //console.log(tasa)
     const area = parseFloat(areaTratamiento);
-    console.log(area)
+    //console.log(area)
     const k75Valor = parseFloat(k75);
-    console.log(k75Valor)
+    //console.log(k75Valor)
   
     let resultado;
   

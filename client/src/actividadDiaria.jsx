@@ -78,7 +78,7 @@ function ActividadDiaria() {
           setError('No se encontraron datos para el código proporcionado.');
         }
       } catch (error) {
-        console.error('Error al obtener los datos de la API:', error);
+        //console.error('Error al obtener los datos de la API:', error);
         setError('Hubo un error al cargar los datos de Aux Actividad Diaria.');
       }
     };
@@ -93,7 +93,7 @@ function ActividadDiaria() {
         setError('Erro al obtener los datos de grado de protección.')
       } 
     } catch (error) {
-      console.error('Error al cargar datos de grado de protección:', error);
+      //console.error('Error al cargar datos de grado de protección:', error);
     } 
   };
    

@@ -117,7 +117,7 @@ function OcupTablas() {
       console.error('Error al guardar el informe:', error);
   
       if (error.response) {
-        console.error('Detalles del error:', error.response.data);
+        //console.error('Detalles del error:', error.response.data);
         setMensaje(`Error al guardar el informe: ${error.response.data.message}`);
       } else {
         setMensaje('Error al guardar el informe. Verifique la consola para más detalles.');
@@ -141,13 +141,13 @@ function OcupTablas() {
       if (registroCoincidente) {
         setRegistroFiltrado(registroCoincidente);
         buscarValorCoincidente(registroCoincidente, selectedActividadDiaria?.codigoIdentificacion);
-        console.log(registroCoincidente);
+        //console.log(registroCoincidente);
       } else {
         setError('No se encontró un registro que coincida con el ID_Escenario en Indice de Riesgo Agregado.');
       }
     } catch (error) {
-      console.error('Error al obtener los datos de  Indice de Riesgo Agregado:', error);
-      setError('Hubo un error al cargar los datos.');
+      //console.error('Error al obtener los datos de  Indice de Riesgo Agregado:', error);
+      setError('Error al obtener los datos de  Indice de Riesgo Agregado.');
     }
   };
   
@@ -205,7 +205,7 @@ function OcupTablas() {
         setError('No se encontró un registro coincidente con el ID_Escenario para HI-Cancer.');
       }
     } catch (error) {
-      console.error('Error al obtener los datos de HI Cáncer:', error);
+      //console.error('Error al obtener los datos de HI Cáncer:', error);
       setError('Hubo un error al cargar los datos de HI Cáncer.');
     }
   };

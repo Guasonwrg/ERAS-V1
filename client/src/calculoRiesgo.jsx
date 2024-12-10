@@ -57,7 +57,7 @@ function CalculoRiesgo() {
     //const selectedTasaDilucion = location.state?.selectedTasaDilucion;
     //const selectedActividadDiaria = location.state?.selectedActividadDiaria;
   
-    console.log(selectedActividadDiaria);
+    //console.log(selectedActividadDiaria);
     // Cargar los valores desde `selectedEscenario` y otros datos si están disponibles
     useEffect(() => {
       if (selectedEscenario) {

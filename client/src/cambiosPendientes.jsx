@@ -40,7 +40,7 @@ const CambiosPendientes = () => {
         setModificados(modificados || []);
         setEliminados(eliminados || []);
       } catch (error) {
-        console.error('Error al obtener cambios pendientes:', error);
+        //console.error('Error al obtener cambios pendientes:', error);
       } finally {
         setLoading(false);
       }
@@ -101,7 +101,7 @@ const CambiosPendientes = () => {
         setModificados(modificados.filter((item) => !registrosConfirmados.includes(item.Registro)));
       }
     } catch (error) {
-      console.error(`Error al confirmar todos los registros de ${activeTab}:`, error);
+      //console.error(`Error al confirmar todos los registros de ${activeTab}:`, error);
       setMensaje(`Error al confirmar todos los registros de ${activeTab}.`);
     }
   };
@@ -169,7 +169,7 @@ const CambiosPendientes = () => {
         }
       
     } catch (error) {
-        console.error(`Error al confirmar ${tipo.slice(0, -1)}:`, error);
+        //console.error(`Error al confirmar ${tipo.slice(0, -1)}:`, error);
         setMensaje(`Error al confirmar ${tipo.slice(0, -1)}.`);
     }
 };

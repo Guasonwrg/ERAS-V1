@@ -28,7 +28,7 @@ function EscenariosList() {
         setEscenarios(response.data);
         setFilteredEscenarios(response.data); 
       } catch (error) {
-        console.error('Error al obtener los escenarios:', error);
+        //console.error('Error al obtener los escenarios:', error);
         setError('Hubo un error al cargar los escenarios.'); 
       }
     };

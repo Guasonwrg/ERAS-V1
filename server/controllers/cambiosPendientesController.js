@@ -64,10 +64,10 @@ const esRegistroValido = (registro) => {
 // Confirmar agregados (inserción masiva)
 const confirmarAgregados = async (req, res) => {
   const agregados = req.body;
-  console.log('Datos recibidos en confirmarAgregados:', agregados);
+  //console.log('Datos recibidos en confirmarAgregados:', agregados);
 
   const validos = agregados.filter(esRegistroValido);
-  console.log('Registros válidos:', validos);
+  //console.log('Registros válidos:', validos);
 
   const sequelize = MgapPest.sequelize;
 

@@ -23,7 +23,7 @@ function UserForm() {
     try {
       // Llamada al backend para agregar el usuario
       const response = await axios.post('http://localhost:5000/api/users/agregar', formData);
-      console.log('Respuesta del servidor:', response.data);
+      //console.log('Respuesta del servidor:', response.data);
       navigate('/usuarios'); // Redirigir a la lista de usuarios
     } catch (error) {
       console.error('Error al crear usuario:', error);

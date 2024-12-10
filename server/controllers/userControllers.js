@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
 
 // Crear usuario
 const createUser = async (req, res) => {
-  console.log("Solicitud para crear usuario recibida");
+  //console.log("Solicitud para crear usuario recibida");
   const { Nombre, Apellido, Email, Contraseña, Empresa, Rol } = req.body;
   try {
     // Encriptar la contraseña antes de guardar

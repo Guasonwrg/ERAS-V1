@@ -8,7 +8,7 @@ function FormulariosVista() {
 
   // Función para redirigir a la vista de la lista de escenarios
   const handleAgregarClick = () => {
-    console.log('Botón Agregar clickeado'); // Agrega este console.log para verificar que se ejecute
+    //console.log('Botón Agregar clickeado'); 
     navigate('/escenarios-list');
   };
 
