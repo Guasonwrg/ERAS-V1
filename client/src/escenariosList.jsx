@@ -24,7 +24,7 @@ function EscenariosList() {
   useEffect(() => {
     const fetchEscenarios = async () => {
       try {
-        const response = await axios.get('http://34.39.142.103:5000/api/escenarios');
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/escenarios');
         setEscenarios(response.data);
         setFilteredEscenarios(response.data); 
       } catch (error) {

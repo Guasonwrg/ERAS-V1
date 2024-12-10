@@ -91,7 +91,7 @@ function OcupTablas() {
   
     try {
       const response = await axios.post(
-        'http://34.39.142.103:5000/api/informes-ocupacional/guardar',
+        'https://eras-latitud-demo.com:5000/api/informes-ocupacional/guardar',
         datosInforme
       );
 
@@ -130,7 +130,7 @@ function OcupTablas() {
   //API's para obtener datos necesarios del al BD para el informe que se comparan con los datos ingresado por el usuario
   const obtenerARIFiltrado = async () => {
     try {
-      const response = await axios.get('http://34.39.142.103:5000/api/riesgo-agregado'); 
+      const response = await axios.get('https://eras-latitud-demo.com:5000/api/riesgo-agregado'); 
       const datos = response.data;
 
       // Filtrar por el ID_Escenario
@@ -183,7 +183,7 @@ function OcupTablas() {
 
   const obtenerHiCancer = async () => {
     try {
-      const response = await axios.get('http://34.39.142.103:5000/api/hi-cancer');
+      const response = await axios.get('https://eras-latitud-demo.com:5000/api/hi-cancer');
       const datos = response.data;
 
       // Filtrar el registro que coincide con el ID_Escenario

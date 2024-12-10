@@ -8,7 +8,7 @@ function BatchButton() {
   const ejecutarBatch = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('http://34.39.142.103:5000/api/batch/ejecutar-batch');
+      const response = await axios.post('https://eras-latitud-demo.com:5000/api/batch/ejecutar-batch');
       Swal.fire('Éxito', response.data.message, 'success');
     } catch (error) {
       Swal.fire('Error', 'Hubo un problema al ejecutar el proceso batch.', 'error');

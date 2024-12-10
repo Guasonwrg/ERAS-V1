@@ -40,7 +40,7 @@ const [selectedCoadyuvante, setSelectedCoadyuvante] = useState(() => {
   useEffect(() => {
     const fetchPesticidas = async () => {
       try {
-        const response = await axios.get('http://34.39.142.103:5000/api/pesticidas');
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/pesticidas');
         setPesticidas(response.data);
       } catch (error) {
         console.error('Error al cargar los pesticidas:', error);
@@ -48,7 +48,7 @@ const [selectedCoadyuvante, setSelectedCoadyuvante] = useState(() => {
     };
     const fetchCoadyuvantes = async () => {
       try {
-        const response = await axios.get('http://34.39.142.103:5000/api/coadyuvantes');
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/coadyuvantes');
         setCoadyuvantes(response.data);
       } catch (error) {
         console.error('Error al cargar los coadyuvantes:', error);
@@ -76,7 +76,7 @@ const [selectedCoadyuvante, setSelectedCoadyuvante] = useState(() => {
   
     if (pesticida.Sustancia_Activa_1) {
       try {
-        const response = await axios.get('http://34.39.142.103:5000/api/pesticidas/cas', {
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/pesticidas/cas', {
           params: { ingrediente: pesticida.Sustancia_Activa_1 }
         });
         setCasNumero(response.data.CAS);

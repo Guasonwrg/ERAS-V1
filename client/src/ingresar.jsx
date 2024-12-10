@@ -16,7 +16,7 @@ function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://34.39.142.103:5000/api/users/ingresar', {
+      const response = await axios.post('https://eras-latitud-demo.com:5000/api/users/ingresar', {
         Email,
         Contraseña,
       });
@@ -58,7 +58,7 @@ function LoginPage() {
     try {
       const { credential } = credentialResponse;
 
-      const response = await axios.post('http://34.39.142.103:5000/api/users/google-login', {
+      const response = await axios.post('https://eras-latitud-demo.com:5000/api/users/google-login', {
         token: credential,
       });
 

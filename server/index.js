@@ -34,7 +34,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(cors({
-    origin: 'http://34.39.142.103:3000'
+    origin: 'https://eras-latitud-demo.com'
   }));
 
 app.use(express.json());

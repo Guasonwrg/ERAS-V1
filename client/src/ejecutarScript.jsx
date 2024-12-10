@@ -8,7 +8,7 @@ const EjecutarScript = () => {
         setLoading(true);
         setMensaje('');
         try {
-            const response = await fetch('http://34.39.142.103:5000/api/ejecutar-script');
+            const response = await fetch('https://eras-latitud-demo.com:5000/api/ejecutar-script');
             if (response.ok) {
                 const data = await response.text();
                 setMensaje(`Éxito: ${data}`);

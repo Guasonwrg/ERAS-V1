@@ -33,7 +33,7 @@ const CambiosPendientes = () => {
     const fetchCambiosPendientes = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://34.39.142.103:5000/api/cambios-pendientes');
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/cambios-pendientes');
         const { agregados, modificados, eliminados } = response.data;
 
         setAgregados(agregados || []);
@@ -74,11 +74,11 @@ const CambiosPendientes = () => {
       let method;
   
       if (activeTab === 'agregados') {
-        url = 'http://34.39.142.103:5000/api/cambios-pendientes/confirmar-agregados-masivo';
+        url = 'https://eras-latitud-demo.com:5000/api/cambios-pendientes/confirmar-agregados-masivo';
         data = agregados; 
         method = 'post';
       } else if (activeTab === 'modificados') {
-        url = 'http://34.39.142.103:5000/api/cambios-pendientes/confirmar-modificados-masivo';
+        url = 'https://eras-latitud-demo.com:5000/api/cambios-pendientes/confirmar-modificados-masivo';
         data = modificados; 
         method = 'put';
       } else {
@@ -116,12 +116,12 @@ const CambiosPendientes = () => {
 
         switch (tipo) {
             case 'agregados':
-                url = 'http://34.39.142.103:5000/api/cambios-pendientes/confirmar-agregado';
+                url = 'https://eras-latitud-demo.com:5000/api/cambios-pendientes/confirmar-agregado';
                 payload = { ...registro }; 
                 method = 'post';
                 break;
             case 'modificados':
-                url = 'http://34.39.142.103:5000/api/cambios-pendientes/confirmar-modificado';
+                url = 'https://eras-latitud-demo.com:5000/api/cambios-pendientes/confirmar-modificado';
                 payload = { Registro: registro.Registro || registro.DatosCompletos.Registro, modificaciones: registro.DatosCompletos || registro };
                 method = 'put';
                 break;
@@ -140,7 +140,7 @@ const CambiosPendientes = () => {
                 // Si el usuario cancela, salir de la función
                 if (!confirmResult.isConfirmed) return;
                 
-                url = 'http://34.39.142.103:5000/api/cambios-pendientes/confirmar-eliminado';
+                url = 'https://eras-latitud-demo.com:5000/api/cambios-pendientes/confirmar-eliminado';
                 payload = { PK_pest: registro.PK_pest };
                 method = 'delete';
                 break;

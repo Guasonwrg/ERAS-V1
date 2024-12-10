@@ -66,7 +66,7 @@ function ActividadDiaria() {
     //console.log(selectedTasaDilucion);
     const obtenerDatosAuxActividadDiaria = async () => {
       try {
-        const response = await axios.get('http://34.39.142.103:5000/api/actividad-diaria', {
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/actividad-diaria', {
           params: {codigoUnificado: selectedEscenario.Codigo_unificado_actividad_diaria }
         });
         const datos = response.data;
@@ -84,7 +84,7 @@ function ActividadDiaria() {
     };
     const getGradoProteccion = async () => {
       try {
-        const response = await axios.get('http://34.39.142.103:5000/api/grado-proteccion');
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/grado-proteccion');
       
       const datosGradoProteccion = response.data;
       if (datosGradoProteccion){

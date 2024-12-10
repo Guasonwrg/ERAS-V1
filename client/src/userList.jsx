@@ -13,7 +13,7 @@ function UserList() {
 
   // Obtener usuarios desde la API al cargar la vista
   useEffect(() => {
-    axios.get('http://34.39.142.103:5000/api/users') 
+    axios.get('https://eras-latitud-demo.com:5000/api/users') 
       .then(response => {
         setUsers(response.data); 
       })
@@ -36,7 +36,7 @@ function UserList() {
     }).then((result) => {
       if (result.isConfirmed) {
         // Llamar a la API para eliminar el usuario
-        axios.delete(`http://34.39.142.103:5000/api/users/${userId}`)
+        axios.delete(`https://eras-latitud-demo.com:5000/api/users/${userId}`)
           .then(() => {
             setUsers(users.filter(user => user.Id !== userId)); // Actualiza la lista sin el usuario eliminado
             Swal.fire('Eliminado!', 'El usuario ha sido eliminado.', 'success');

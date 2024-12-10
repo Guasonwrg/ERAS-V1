@@ -38,7 +38,7 @@ function EditarPesticida() {
   useEffect(() => {
     const fetchPesticida = async () => {
       try {
-        const response = await axios.get(`http://34.39.142.103:5000/api/pesticidas/pesticida/${PK_Pest}`);
+        const response = await axios.get(`https://eras-latitud-demo.com:5000/api/pesticidas/pesticida/${PK_Pest}`);
         console.log('Datos de pesticida:', response.data); // Verifica si los datos se muestran en la consola
         setForm(response.data);
       } catch (error) {
@@ -58,7 +58,7 @@ function EditarPesticida() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://34.39.142.103:5000/api/pesticidas/pesticida/editar/${PK_Pest}`, form);
+      await axios.put(`https://eras-latitud-demo.com:5000/api/pesticidas/pesticida/editar/${PK_Pest}`, form);
       setMensaje({ tipo: 'exito', texto: 'Cambios guardados exitosamente.' });
       setTimeout(() => {
         navigate('/pesticidas-abm'); // Redirige después de un tiempo

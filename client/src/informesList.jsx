@@ -25,7 +25,7 @@ function InformesList() {
         }
         
 
-        const response = await axios.get('http://34.39.142.103:5000/api/informes-ocupacional', {
+        const response = await axios.get('https://eras-latitud-demo.com:5000/api/informes-ocupacional', {
           headers: {
             Authorization: `Bearer ${token}`, // Enviar el token en los headers
           },
@@ -63,7 +63,7 @@ function InformesList() {
     }).then((result) => {
       if (result.isConfirmed) {
         // Llamar a la API para eliminar el informe
-        axios.delete(`http://34.39.142.103:5000/api/informes-ocupacional/${informeId}`, {
+        axios.delete(`https://eras-latitud-demo.com:5000/api/informes-ocupacional/${informeId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
           },

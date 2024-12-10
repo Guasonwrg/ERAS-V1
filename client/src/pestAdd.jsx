@@ -68,7 +68,7 @@ function AgregarPesticida() {
     }
 
     try {
-      const response = await axios.post('http://34.39.142.103:5000/api/pesticidas/agregar-pesticida', form);
+      const response = await axios.post('https://eras-latitud-demo.com:5000/api/pesticidas/agregar-pesticida', form);
       if (response.status === 201) {
         setMensaje({ tipo: 'exito', texto: 'Pesticida agregado exitosamente.' });
         setTimeout(() => {
